@@ -122,7 +122,7 @@ class MessageWidget {
                   rows="6"
                 ></textarea>
             </div>
-            <button onclick="submitChat()">Send Message</button>
+            <button type="button" onclick="submitChat()">Send Message</button>
         </form>
     `;
   }
