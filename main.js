@@ -6,7 +6,7 @@ class MessageWidget {
     this.open = false;
     this.initialize();
     this.injectStyles();
-    alert(siteId);
+    console.log("siteId", siteId);
    }
 
   position = "";
