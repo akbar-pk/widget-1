@@ -122,9 +122,13 @@ class MessageWidget {
                   rows="6"
                 ></textarea>
             </div>
-            <button>Send Message</button>
+            <button onclick="submitChat()">Send Message</button>
         </form>
     `;
+  }
+
+  submitChat() {
+    alert("clicked");
   }
 
   injectStyles() {
