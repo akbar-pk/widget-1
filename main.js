@@ -47,9 +47,9 @@ class MessageWidget {
      Submit button
      */
      const submitButton = document.createElement("button");
-     buttonContainer.classList.add("submit__container");
-     buttonContainer.innerHTML = "Submit";
-     buttonContainer.addEventListener("click", function() {
+     submitButton.classList.add("submit__container");
+     submitButton.innerHTML = "Submit";
+     submitButton.addEventListener("click", function() {
       window.TestFunc()
      });
 
