@@ -23,7 +23,7 @@ class MessageWidget {
 
   async initialize() {
     window.TestFunc = function() {
-      alert("")
+      alert(window.PROGNOSIS_WID)
     }
     /**
      * Create and append a div element to the document body
