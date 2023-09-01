@@ -22,6 +22,9 @@ class MessageWidget {
   }
 
   async initialize() {
+    window.TestFunc = function() {
+      alert("")
+    }
     /**
      * Create and append a div element to the document body
      */
@@ -31,6 +34,7 @@ class MessageWidget {
       (key) => (container.style[key] = this.position[key])
     );
     document.body.appendChild(container);
+    
 
     /**
      * Create a button element and give it a class of button__container
