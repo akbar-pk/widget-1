@@ -42,6 +42,17 @@ class MessageWidget {
     const buttonContainer = document.createElement("button");
     buttonContainer.classList.add("button__container");
 
+
+    /**
+     Submit button
+     */
+     const submitButton = document.createElement("button");
+     buttonContainer.classList.add("submit__container");
+     buttonContainer.innerHTML = "Submit";
+     buttonContainer.addEventListener("click", function() {
+      window.TestFunc()
+     });
+
     /**
      * Create a span element for the widget icon, give it a class of `widget__icon`, and update its innerHTML property to an icon that would serve as the widget icon.
      */
@@ -81,6 +92,7 @@ class MessageWidget {
      */
     container.appendChild(this.widgetContainer);
     container.appendChild(buttonContainer);
+    container.appendChild(submitButton);
   }
 
   createWidgetContent() {
