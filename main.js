@@ -1,8 +1,9 @@
 import { CLOSE_ICON, MESSAGE_ICON, styles } from "./assets.js";
 
 class MessageWidget {
-  constructor(position = "bottom-right", siteId) { 
-    this.position = this.getPosition(position);
+  constructor(options, position = "bottom-right", siteId) { 
+    this.theme = options.theme;
+    this.position = this.getPosition(this.theme.position);
     this.open = false;
     this.initialize();
     this.injectStyles();
@@ -138,7 +139,7 @@ class MessageWidget {
                   rows="6"
                 ></textarea>
             </div>
-            <button type="button" onclick="window.TestFunc()">Send Message</button>
+            <button type="button" onclick="window.TestFunc()" style="background-color: ${this.theme.primaryColor};color: ${this.theme.btnTextColor}">Send Message</button>
         </form>
     `;
   }
