@@ -7,7 +7,7 @@ class MessageWidget {
     this.open = false;
     this.initialize();
     this.injectStyles();
-    console.log("options", options);
+    console.log("options", this.theme);
    }
 
   position = "";
