@@ -168,8 +168,8 @@ class MessageWidget {
   }
 }
 
-function initializeWidget() {
-  return new MessageWidget();
+function initializeWidget(position) {
+  return new MessageWidget(position);
 }
 
 // initializeWidget();
