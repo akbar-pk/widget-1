@@ -172,4 +172,5 @@ function initializeWidget() {
   return new MessageWidget();
 }
 
-initializeWidget();
+// initializeWidget();
+window.PrognosisWidget = initializeWidget;
