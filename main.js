@@ -173,4 +173,4 @@ function initializeWidget(position) {
 }
 
 // initializeWidget();
-window.IntPrognosisWidget = MessageWidget;
+window.IntPrognosisWidget = initializeWidget;
