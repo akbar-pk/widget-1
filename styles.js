@@ -45,13 +45,15 @@ export const styles = `
     .prognosis__display_area {
         width: 100%;
         height: calc(100% - 110px);
-        padding: 15px;
+        padding: 70px 15px 15px 15px;
         box-sizing: border-box;
+        overflow: auto;
     }
     .prognosis__wrapper {
         display: flex;
         height: 100%;
         width: 100%;
+        gap: 15px;
     }
     .prognosis__main-wrap {
         flex: 1;
