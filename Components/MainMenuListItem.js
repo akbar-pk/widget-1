@@ -1,4 +1,4 @@
-import { increment, decrement, store, state } from "../store/counterSlice.js"
+// import { increment, decrement, store, state } from "../store/counterSlice.js"
 
 class MainMenuListItem extends HTMLLIElement {
     constructor() {
@@ -16,12 +16,12 @@ class MainMenuListItem extends HTMLLIElement {
         this.toggleBtn.innerText = "";
         this.toggleBtn.addEventListener("click", () => {
             // this.dataset.expanded = !this.isExpanded;
-            store.dispatch(increment());
+            // store.dispatch(increment());
             
             // const state = store.getState();
-            store.subscribe((state) => {
-                console.log("state", state);
-            })
+            // store.subscribe((state) => {
+            //     console.log("state", state);
+            // })
             
             this.isExpanded
         });
