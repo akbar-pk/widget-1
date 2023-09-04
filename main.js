@@ -46,6 +46,7 @@ class MessageWidget {
      */
     const container = document.createElement("div");
     container.style.position = "fixed";
+    container.style.zIndex = "123456789012";
     Object.keys(this.position).forEach(
       (key) => (container.style[key] = this.position[key])
     );
