@@ -1,4 +1,3 @@
-import "./Redux.js"
 // initialize state
 const initialState = { counter: 0 };
 

@@ -1,3 +1,4 @@
+import * as Redux from "/store/Redux.js"
 import { styles } from "./styles.js";
 import { PROGNOSIS_AI_LOGO, CLOSE_ICON, MESSAGE_ICON, CHT_ICON } from "./svgIcons.js";
 import "./Components/ExpandableList.js";
