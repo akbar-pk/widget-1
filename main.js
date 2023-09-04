@@ -1,8 +1,18 @@
-import { CLOSE_ICON, MESSAGE_ICON, styles } from "./assets.js";
+import { styles } from "./styles.js";
+import { PROGNOSIS_AI_LOGO, CLOSE_ICON, MESSAGE_ICON, CHT_ICON } from "./svgIcons.js";
+import "./Components/ExpandableList.js";
+import "./Components/MainMenuListItem.js";
 
 class MessageWidget {
   constructor(options) { 
-    this.theme = options.theme;
+    this.defaultTheme = {
+      primaryColor: "red",
+      secondaryColor: "rgb(239, 241, 247)",
+      sideMenuBgColor: "#F5F6F7",
+      btnTextColor: "#ffffff",
+      position: "bottom-right"
+    }
+    this.theme = options.theme ? options.theme : this.defaultTheme;
     this.position = this.getPosition(this.theme.position);
     this.open = false;
     this.initialize();
@@ -13,6 +23,10 @@ class MessageWidget {
   position = "";
   open = false;
   widgetContainer = null;
+  headerContainer = null;
+  buttonContainer = null;
+
+  
 
   getPosition(position) {
     const [vertical, horizontal] = position.split("-");
@@ -36,12 +50,37 @@ class MessageWidget {
     );
     document.body.appendChild(container);
     
+    /**
+    * Create chat header with expand and close button
+    */
 
+    this.headerContainer = document.createElement("div");
+    this.headerContainer.classList.add("prognosis-chat-header");
+
+    /** Maximize */
+    const maximizeBtn = document.createElement("button");
+    maximizeBtn.style.cursor = "pointer";
+    maximizeBtn.style.marginRight = "20px";
+    maximizeBtn.innerText = "<>";
+    maximizeBtn.classList.add("prognosis-chat-maximize-header");
+    maximizeBtn.classList.add("prognosis-chat-close-header");
+    maximizeBtn.addEventListener("click", this.maximizeChatbox.bind(this));
+    this.headerContainer.appendChild(maximizeBtn);
+
+    const chatCloseBtn = document.createElement("button");
+    chatCloseBtn.style.cursor = "pointer";
+    chatCloseBtn.innerText = "x";
+    chatCloseBtn.classList.add("prognosis-chat-close-header");
+    chatCloseBtn.addEventListener("click", this.toggleOpen.bind(this));
+    this.headerContainer.appendChild(chatCloseBtn);
+
+    
+    
     /**
      * Create a button element and give it a class of button__container
      */
-    const buttonContainer = document.createElement("button");
-    buttonContainer.classList.add("button__container");
+    this.buttonContainer = document.createElement("button");
+    this.buttonContainer.classList.add("button__container");
 
 
     /**
@@ -73,9 +112,9 @@ class MessageWidget {
     /**
      * Append both icons created to the button element and add a `click` event listener on the button to toggle the widget open and close.
      */
-    buttonContainer.appendChild(this.widgetIcon);
-    buttonContainer.appendChild(this.closeIcon);
-    buttonContainer.addEventListener("click", this.toggleOpen.bind(this));
+    this.buttonContainer.appendChild(this.widgetIcon);
+    this.buttonContainer.appendChild(this.closeIcon);
+    this.buttonContainer.addEventListener("click", this.toggleOpen.bind(this));
 
     /**
      * Create a container for the widget and add the following classes:- `widget__hidden`, `widget__container`
@@ -91,56 +130,46 @@ class MessageWidget {
     /**
      * Append the widget's content and the button to the container
      */
+    
     container.appendChild(this.widgetContainer);
-    container.appendChild(buttonContainer);
-    container.appendChild(submitButton);
+    container.appendChild(this.buttonContainer);
+    // container.appendChild(submitButton);
+
   }
+
+  test() {
+    alert("Test")
+  }
+
+  // <div class="prognosis-sidebar-menu-wrapper" style="background-color: ${this.theme.sideMenuBgColor}">
+  //           ${PROGNOSIS_AI_LOGO}
+  //           <ul class="prognosis-sidebar-menu-list">
+  //             <li>
+  //               <div class="prognosis-menu-title">${CHT_ICON} <span>Chat</span></div>
+  //               <ul class="prognosis-menu-children">
+  //                 <li>New Chat</li>
+  //                 <li>Existing Chat</li>
+  //               </ul>
+  //             </li>
+  //           </ul>
+  //       </div>
 
   createWidgetContent() {
     this.widgetContainer.innerHTML = `
-        <header class="widget__header">
-            <h3>Start a conversation</h3>
-            <p>We usually respond within a few hours</p>
-        </header>
-        <form>
-            <div class="form__field">
-                <label for="name">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Enter your name"
-                />
-            </div>
-            <div class="form__field">
-                <label for="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Enter your email"
-                />
-            </div>
-            <div class="form__field">
-                <label for="subject">Subject</label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  placeholder="Enter Message Subject"
-                />
-            </div>
-            <div class="form__field">
-                <label for="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Enter your message"
-                  rows="6"
-                ></textarea>
-            </div>
-            <button type="button" onclick="window.TestFunc()" style="background-color: ${this.theme.primaryColor};color: ${this.theme.btnTextColor}">Send Message</button>
-        </form>
+      <div class="prognosis-sidebar-menu-wrapper" style="background-color: ${this.theme.sideMenuBgColor}">
+            ${PROGNOSIS_AI_LOGO}
+            <ul class="prognosis-sidebar-menu-list">
+              <li>
+                <div class="prognosis-menu-title">${CHT_ICON} <span>Chat</span></div>
+                <ul class="prognosis-menu-children">
+                  <li is="menu-list-item" data-id="newChat">New Chat</li>
+                  <li is="menu-list-item" data-id="existingChat">Existing Chat</li>
+                </ul>
+              </li>
+            </ul>
+            
+        </div>
+      
     `;
   }
 
@@ -154,24 +183,50 @@ class MessageWidget {
     document.head.appendChild(styleTag);
   }
 
+  maximizeChatbox() {
+    const isFullWidth = this.widgetContainer.classList.contains("full-width");
+    isFullWidth ? this.widgetContainer.classList.remove("full-width") : this.widgetContainer.classList.add("full-width")
+  }
+
   toggleOpen() {
     this.open = !this.open;
     if (this.open) {
       this.widgetIcon.classList.add("widget__hidden");
       this.closeIcon.classList.remove("widget__hidden");
       this.widgetContainer.classList.remove("widget__hidden");
+      this.widgetContainer.appendChild(this.headerContainer);
+      this.buttonContainer.classList.add("btn-main-hidden");
+      this.widgetContainer.appendChild(this.headerContainer);
+      console.log("this.buttonContainer 1", this.buttonContainer);
     } else {
       this.createWidgetContent();
       this.widgetIcon.classList.remove("widget__hidden");
       this.closeIcon.classList.add("widget__hidden");
       this.widgetContainer.classList.add("widget__hidden");
+      this.buttonContainer.classList.remove("btn-main-hidden");
+      console.log("this.buttonContainer 2", this.buttonContainer);
     }
   }
+
+  
+
 }
 
 function initializeWidget(position) {
   return new MessageWidget(position);
+  
 }
 
-// initializeWidget();
+const options = {
+  // theme: {
+  //   primaryColor: "red",
+  //   secondaryColor: "rgb(239, 241, 247)",
+  //   btnTextColor: "#ffffff",
+  //   position: "bottom-right"
+  // }
+  
+};
+
+initializeWidget(options);
+
 window.IntPrognosisWidget = initializeWidget;

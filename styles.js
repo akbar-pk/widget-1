@@ -1,23 +1,88 @@
 export const styles = `
     .widget__container * {
         box-sizing: border-box;
-    }        
+        padding: 0;
+        margin: 0;
+    } 
+    .prognosis-sidebar-menu-wrapper {
+        padding: 25px 15px 15px 25px;
+        width: 256px;
+        height: 100%;
+    }
+    .prognosis-sidebar-menu-list {
+        list-style: none;
+        color: #000;
+        margin: 74px 0 0 0;
+    }
+    .prognosis-sidebar-menu-list .prognosis-menu-title {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+    }
+    .prognosis-sidebar-menu-list .prognosis-menu-title span {
+        display: block;
+        font-weight: bold;
+        margin: 0 0 0 23px;
+    }
+    .prognosis-sidebar-menu-list .prognosis-menu-children {
+        list-style: none;
+        font-size: 15px;
+        margin: 18px 0 0 48px;
+    }
+    .prognosis-sidebar-menu-list .prognosis-menu-children {
+        line-height: 2
+    }
+    .prognosis-sidebar-menu-list .prognosis-menu-children li {
+        cursor: pointer;
+    }
+    .prognosis-sidebar-menu-list ul li {
+        color: #4C535D;
+    }
+    
+    .prognosis-chat-close-header {
+        border-radius: 100rem;
+        border: 1px solid #ccc;
+        font-size: 1.1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+    }
+    .btn-main-hidden {
+        display: none !important;
+    }
+    .prognosis-chat-header {
+        padding: 10px;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+        z-index: 2;
+        top: 0;
+    }
+           
     h3, p, input {
         margin: 0;
         padding: 0;
     }
     .widget__container {
         box-shadow: 0 0 18px 8px rgba(0, 0, 0, 0.1), 0 0 32px 32px rgba(0, 0, 0, 0.08);
-        width: 400px;
+        width: 50vw;
+        height: 100vh;
         overflow: auto;
         right: -25px;
-        bottom: 75px;
+        bottom: -25px;
         position: absolute;
         transition: max-height .2s ease;
         font-family: Helvetica, Arial ,sans-serif;
-        background-color: #e6e6e6a6;
+        background-color: #ffffff;
         border-radius: 10px;
         box-sizing: border-box;
+    }
+    .widget__container.full-width {
+        width: 100vw;
     }
     .widget__icon {
         cursor: pointer;
@@ -94,16 +159,5 @@ export const styles = `
     }
 `;
 
-export const MESSAGE_ICON = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-        <polyline points="22,6 12,13 2,6"></polyline>
-    </svg>
-`;
 
-export const CLOSE_ICON = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-    </svg>
-`;
+
