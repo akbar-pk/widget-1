@@ -220,6 +220,6 @@ function initializeWidget(position) {
   
 }
 
-initializeWidget(options);
+// initializeWidget(options);
 
 window.IntPrognosisWidget = initializeWidget;
