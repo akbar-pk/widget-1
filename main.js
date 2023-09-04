@@ -80,6 +80,7 @@ class MessageWidget {
      * Create a button element and give it a class of button__container
      */
     this.buttonContainer = document.createElement("button");
+    this.buttonContainer.style.backgroundColor = this.theme.primaryColor;
     this.buttonContainer.classList.add("button__container");
 
 
