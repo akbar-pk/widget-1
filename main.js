@@ -220,16 +220,6 @@ function initializeWidget(position) {
   
 }
 
-const options = {
-  // theme: {
-  //   primaryColor: "red",
-  //   secondaryColor: "rgb(239, 241, 247)",
-  //   btnTextColor: "#ffffff",
-  //   position: "bottom-right"
-  // }
-  
-};
-
 initializeWidget(options);
 
 window.IntPrognosisWidget = initializeWidget;
