@@ -16,6 +16,7 @@ class MessageWidget {
     }
     this.theme = options.theme ? options.theme : this.defaultTheme;
     localStorage.setItem("prognosisTheme", JSON.stringify(this.theme));
+    localStorage.setItem("prognosisOAKey", options.prognosisOAKey);
     this.position = this.getPosition(this.theme.position);
     this.open = false;
     this.initialize();
@@ -234,6 +235,6 @@ const options = {
   
 };
 
-// initializeWidget(options);
+initializeWidget(options);
 
 window.IntPrognosisWidget = initializeWidget;

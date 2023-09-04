@@ -44,7 +44,8 @@ class Consultation extends HTMLDivElement {
         
         this.appendChild(this.displayArea);
         this.appendChild(this.inputWrapper);
-        this.API_KEY = "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";
+        this.API_KEY = localStorage.getItem("prognosisOAKey");
+
     }
 
     get consult() {
