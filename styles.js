@@ -4,6 +4,60 @@ export const styles = `
         padding: 0;
         margin: 0;
     } 
+
+    .prognosis__chat_bubble_in {
+        border: 1px solid blue;
+        border-radius: 20px;
+        padding: 10px;
+    }
+    .prognosis__consult_submitBtn {
+        width: 35px;
+        height: 35px;
+        border-radius: 100%;
+        border: unset;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .prognosis__consult_wrap {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    .prognosis__consult_inputbox {
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        padding: 15px;
+        width: calc(100% - 50px);
+        height: 100px
+    }
+    .prognosis__consult_inputbox:focus-visible {
+        border: 1px solid gray !important;
+    }
+    .prognosis__consult_submitBtn svg {
+        width: 20px;
+        hegiht: 20px;
+    }
+    .prognosis__conslutation_holder {
+        height: 100%;
+    }
+    .prognosis__display_area {
+        width: 100%;
+        height: calc(100% - 110px);
+        padding: 15px;
+        box-sizing: border-box;
+    }
+    .prognosis__wrapper {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+    .prognosis__main-wrap {
+        flex: 1;
+        width: calc(100% - 296px)
+    }
+    
     .prognosis-sidebar-menu-wrapper {
         padding: 25px 15px 15px 25px;
         width: 256px;

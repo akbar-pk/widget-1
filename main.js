@@ -3,6 +3,7 @@ import { styles } from "./styles.js";
 import { PROGNOSIS_AI_LOGO, CLOSE_ICON, MESSAGE_ICON, CHT_ICON } from "./svgIcons.js";
 import "./Components/ExpandableList.js";
 import "./Components/MainMenuListItem.js";
+import "./Components/ChatModules/Consultation.js";
 
 class MessageWidget {
   constructor(options) { 
@@ -14,6 +15,7 @@ class MessageWidget {
       position: "bottom-right"
     }
     this.theme = options.theme ? options.theme : this.defaultTheme;
+    localStorage.setItem("prognosisTheme", JSON.stringify(this.theme));
     this.position = this.getPosition(this.theme.position);
     this.open = false;
     this.initialize();
@@ -159,7 +161,9 @@ class MessageWidget {
 
   createWidgetContent() {
     this.widgetContainer.innerHTML = `
-      <div class="prognosis-sidebar-menu-wrapper" style="background-color: ${this.theme.sideMenuBgColor}">
+    <div class="prognosis__wrapper">
+      <div class="prognosis-sidebar-menu-wrapper" style="background-color: ${this.theme.secondaryColor}">
+        <div class="aside-wrap">
             ${PROGNOSIS_AI_LOGO}
             <ul class="prognosis-sidebar-menu-list">
               <li>
@@ -170,9 +174,12 @@ class MessageWidget {
                 </ul>
               </li>
             </ul>
-            
+          </div>
         </div>
-      
+        <div class="prognosis__main-wrap">
+            <div class="prognosis__conslutation_holder" is="consultation-component" data-id="consultaton_comp_wrap"></div>
+          </div>
+    </div>
     `;
   }
 
@@ -210,9 +217,6 @@ class MessageWidget {
       console.log("this.buttonContainer 2", this.buttonContainer);
     }
   }
-
-  
-
 }
 
 function initializeWidget(position) {
@@ -220,6 +224,16 @@ function initializeWidget(position) {
   
 }
 
-// initializeWidget(options);
+const options = {
+  theme: {
+    primaryColor: "green",
+    secondaryColor: "#F5F6F7",
+    btnTextColor: "#ffffff",
+    position: "bottom-right"
+  }
+  
+};
+
+initializeWidget(options);
 
 window.IntPrognosisWidget = initializeWidget;
