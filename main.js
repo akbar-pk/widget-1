@@ -234,6 +234,6 @@ const options = {
   
 };
 
-initializeWidget(options);
+// initializeWidget(options);
 
 window.IntPrognosisWidget = initializeWidget;
