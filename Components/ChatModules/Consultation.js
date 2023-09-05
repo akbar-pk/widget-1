@@ -1,4 +1,4 @@
-import { SEND_ICON } from "../../svgIcons.js";
+import { RECORDING_ICON, SEND_ICON, START_RECORD_ICON } from "../../svgIcons.js";
 
 class Consultation extends HTMLDivElement {
     constructor() {
@@ -14,6 +14,8 @@ class Consultation extends HTMLDivElement {
 
         this.chatBubble = document.createElement("div");
         this.chatBubble.classList.add("prognosis__chat_bubble_in");
+
+        // Text Input
 
         this.inputBox = document.createElement("TEXTAREA");
         this.inputBox.classList.add("prognosis__consult_inputbox");
@@ -37,13 +39,33 @@ class Consultation extends HTMLDivElement {
             this.processMessageToChatGPT()
         });
 
+        this.textInputWrapper = document.createElement("div");
+        this.textInputWrapper.classList.add("prognosis_text_input_wrapper");
+        this.textInputWrapper.appendChild(this.inputBox);
+        this.textInputWrapper.appendChild(this.submitBtn);
+
+        //Text Input END
+
+        // Rcording
+        this.recordingWrapper = document.createElement("div");
+        this.recordingWrapper.classList.add("prognosis_recording_wrapper");
+            
+        this.startRecordBtn = document.createElement("button");
+        this.startRecordBtn.classList.add("prognosis_start_record_btn");
+        this.startRecordBtn.style.backgroundColor = this.theme.primaryColor;
+        this.startRecordBtn.innerHTML = START_RECORD_ICON;
+
+        this.recordingWrapper.appendChild(this.startRecordBtn);
+        // Rcording END
+
         this.inputWrapper = document.createElement("div");
         this.inputWrapper.classList.add("prognosis__consult_wrap");
-        this.inputWrapper.appendChild(this.inputBox);
-        this.inputWrapper.appendChild(this.submitBtn);
+        this.inputWrapper.appendChild(this.recordingWrapper);
+        this.inputWrapper.appendChild(this.textInputWrapper);
         
         this.appendChild(this.displayArea);
         this.appendChild(this.inputWrapper);
+
         this.API_KEY = localStorage.getItem("prognosisOAKey");
 
     }

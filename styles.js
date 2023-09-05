@@ -5,6 +5,17 @@ export const styles = `
         margin: 0;
     } 
 
+    .prognosis_recording_wrapper {
+        margin-bottom: 15px;
+    }
+
+    .prognosis_start_record_btn {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: none;
+    }
+
     .prognosis__chat_bubble_in {
         border: 1px solid blue;
         border-radius: 20px;
@@ -22,15 +33,21 @@ export const styles = `
     }
     .prognosis__consult_wrap {
         display: flex;
+        flex-direction: column;
         gap: 10px;
         align-items: center;
     }
+    .prognosis_text_input_wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
     .prognosis__consult_inputbox {
-        border-radius: 10px;
+        border-radius: 30px;
         border: 1px solid #ccc;
         padding: 15px;
-        width: calc(100% - 50px);
-        height: 100px
+        height: 50px;
+        width: 300px;
     }
     .prognosis__consult_inputbox:focus-visible {
         border: 1px solid gray !important;
@@ -44,7 +61,7 @@ export const styles = `
     }
     .prognosis__display_area {
         width: 100%;
-        height: calc(100% - 110px);
+        height: calc(100% - 180px);
         padding: 70px 15px 15px 15px;
         box-sizing: border-box;
         overflow: auto;
