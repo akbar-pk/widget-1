@@ -144,10 +144,12 @@ class MessageWidget {
     if(options && options.from) {
       console.log("coming to ", options.from);
       this.createWidgetContent();
-      this.widgetIcon.classList.remove("widget__hidden");
-      this.closeIcon.classList.add("widget__hidden");
-      this.widgetContainer.classList.add("widget__hidden");
-      this.buttonContainer.classList.remove("btn-main-hidden");
+      this.widgetIcon.classList.add("widget__hidden");
+      this.closeIcon.classList.remove("widget__hidden");
+      this.widgetContainer.classList.remove("widget__hidden");
+      this.widgetContainer.appendChild(this.headerContainer);
+      this.buttonContainer.classList.add("btn-main-hidden");
+      this.widgetContainer.appendChild(this.headerContainer);
       this.maximizeChatbox();
     }
   }
