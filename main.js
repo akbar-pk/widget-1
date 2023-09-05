@@ -22,7 +22,7 @@ class MessageWidget {
     this.open = false;
     this.initialize();
     this.injectStyles();
-    console.log("options", this.theme);
+    console.log("options", options);
     this.from = (options && options.from && options.from === "website") ? options.from : null;
    }
 
@@ -140,9 +140,10 @@ class MessageWidget {
     container.appendChild(this.widgetContainer);
     container.appendChild(this.buttonContainer);
     // container.appendChild(submitButton);
-
+     console.log("this.from", this.from);
     if(this.from) {
       this.toggleOpen();
+      maximizeChatbox();
     }
   }
 
