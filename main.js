@@ -23,6 +23,7 @@ class MessageWidget {
     this.initialize();
     this.injectStyles();
     console.log("options", this.theme);
+    this.from = (options && options.from && options.from === "website") ? options.from : null;
    }
 
   position = "";
@@ -30,8 +31,6 @@ class MessageWidget {
   widgetContainer = null;
   headerContainer = null;
   buttonContainer = null;
-
-  
 
   getPosition(position) {
     const [vertical, horizontal] = position.split("-");
@@ -142,6 +141,9 @@ class MessageWidget {
     container.appendChild(this.buttonContainer);
     // container.appendChild(submitButton);
 
+    if(this.from) {
+      this.toggleOpen();
+    }
   }
 
   test() {
@@ -225,17 +227,5 @@ function initializeWidget(position) {
   return new MessageWidget(position);
   
 }
-
-const options = {
-  theme: {
-    primaryColor: "green",
-    secondaryColor: "#F5F6F7",
-    btnTextColor: "#ffffff",
-    position: "bottom-right"
-  }
-  
-};
-
-// initializeWidget(options);
 
 window.IntPrognosisWidget = initializeWidget;
