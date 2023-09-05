@@ -22,8 +22,8 @@ class MessageWidget {
     this.open = false;
     this.initialize();
     this.injectStyles();
-    console.log("options", options);
-    this.from = (options && options.from && options.from === "website") ? options.from : null;
+    console.log("options.from", options.from);
+    this.from = options.from ? options.from : null;
    }
 
   position = "";
