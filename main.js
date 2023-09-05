@@ -150,6 +150,7 @@ class MessageWidget {
       this.widgetContainer.appendChild(this.headerContainer);
       this.buttonContainer.classList.add("btn-main-hidden");
       this.widgetContainer.appendChild(this.headerContainer);
+      this.headerContainer.style.display = "none";
       this.maximizeChatbox();
     }
   }
