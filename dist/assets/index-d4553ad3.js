@@ -14,6 +14,9 @@ var x=Object.defineProperty;var b=(o,t,e)=>t in o?x(o,t,{enumerable:!0,configura
         height: 80px;
         border-radius: 50%;
         border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .prognosis__chat_bubble_in {
@@ -48,6 +51,7 @@ var x=Object.defineProperty;var b=(o,t,e)=>t in o?x(o,t,{enumerable:!0,configura
         padding: 15px;
         height: 50px;
         width: 300px;
+        overflow: hidden;
     }
     .prognosis__consult_inputbox:focus-visible {
         border: 1px solid gray !important;
