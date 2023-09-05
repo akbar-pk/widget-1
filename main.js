@@ -141,7 +141,11 @@ class MessageWidget {
     // container.appendChild(submitButton);
      console.log("this.from", options.from);
     if(options && options.from && options.from === "webiste") {
-      this.toggleOpen();
+      this.createWidgetContent();
+      this.widgetIcon.classList.remove("widget__hidden");
+      this.closeIcon.classList.add("widget__hidden");
+      this.widgetContainer.classList.add("widget__hidden");
+      this.buttonContainer.classList.remove("btn-main-hidden");
       maximizeChatbox();
     }
   }
@@ -211,14 +215,12 @@ class MessageWidget {
       this.widgetContainer.appendChild(this.headerContainer);
       this.buttonContainer.classList.add("btn-main-hidden");
       this.widgetContainer.appendChild(this.headerContainer);
-      console.log("this.buttonContainer 1", this.buttonContainer);
     } else {
       this.createWidgetContent();
       this.widgetIcon.classList.remove("widget__hidden");
       this.closeIcon.classList.add("widget__hidden");
       this.widgetContainer.classList.add("widget__hidden");
       this.buttonContainer.classList.remove("btn-main-hidden");
-      console.log("this.buttonContainer 2", this.buttonContainer);
     }
   }
 }
