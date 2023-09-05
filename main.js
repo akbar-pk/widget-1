@@ -148,7 +148,7 @@ class MessageWidget {
       this.closeIcon.classList.add("widget__hidden");
       this.widgetContainer.classList.add("widget__hidden");
       this.buttonContainer.classList.remove("btn-main-hidden");
-      maximizeChatbox();
+      this.maximizeChatbox();
     }
   }
 
