@@ -23,7 +23,6 @@ class MessageWidget {
     this.initialize();
     this.injectStyles();
     console.log("options.from", options.from);
-    this.from = options.from ? options.from : null;
    }
 
   position = "";
@@ -140,8 +139,8 @@ class MessageWidget {
     container.appendChild(this.widgetContainer);
     container.appendChild(this.buttonContainer);
     // container.appendChild(submitButton);
-     console.log("this.from", this.from);
-    if(this.from) {
+     console.log("this.from", options.from);
+    if(options && options.from && options.from === "webiste") {
       this.toggleOpen();
       maximizeChatbox();
     }
