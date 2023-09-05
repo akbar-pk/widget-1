@@ -141,6 +141,7 @@ class MessageWidget {
     // container.appendChild(submitButton);
      console.log("this.from", options.from);
     if(options && options.from && options.from === "webiste") {
+      console.log("coming to ", options.from);
       this.createWidgetContent();
       this.widgetIcon.classList.remove("widget__hidden");
       this.closeIcon.classList.add("widget__hidden");
