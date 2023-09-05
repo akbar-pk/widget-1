@@ -1,12 +1,14 @@
 // import * as Redux from "/store/Redux.js"
 import { styles } from "./styles.js";
-import { PROGNOSIS_AI_LOGO, CLOSE_ICON, MESSAGE_ICON, CHT_ICON } from "./svgIcons.js";
-import "./Components/ExpandableList.js";
+import { PROGNOSIS_AI_LOGO, CLOSE_ICON, MESSAGE_ICON, CHT_ICON, PROGNOSIS_LOGO, SMART_TASK_ICON } from "./svgIcons.js";
+// import "./Components/ExpandableList.js";
 import "./Components/MainMenuListItem.js";
 import "./Components/ChatModules/Consultation.js";
+import "./Components/ChatModules/PreDefinedQuestions.js";
 
 class MessageWidget {
   constructor(options) { 
+    this.from = "website";
     this.defaultTheme = {
       primaryColor: "red",
       secondaryColor: "rgb(239, 241, 247)",
@@ -22,7 +24,6 @@ class MessageWidget {
     this.open = false;
     this.initialize();
     this.injectStyles();
-    console.log("options.from", options.from);
    }
 
   position = "";
@@ -127,6 +128,10 @@ class MessageWidget {
     this.widgetContainer = document.createElement("div");
     this.widgetContainer.classList.add("widget__hidden", "widget__container");
 
+    // Create chat holder
+    this.chatHolder = document.createElement("div");
+    this.chatHolder.classList.add("prognosis_chat_main");
+
     /**
      * Invoke the `createWidget()` method
      */
@@ -138,11 +143,17 @@ class MessageWidget {
     
     container.appendChild(this.widgetContainer);
     container.appendChild(this.buttonContainer);
-    // container.appendChild(submitButton);
-     console.log("this.from", options.from);
-     console.log("boolean", options.from === "webiste");
-    if(options && options.from) {
-      console.log("coming to ", options.from);
+
+    // Open chat by default
+    setTimeout(() => {
+      document.getElementById("prognosis_consultation_holder").classList.remove("hidden_module");;
+      // document.querySelectorAll(".prognosis_main_nav_item").classList.remove("active");
+      document.getElementById("menu_item_new_chat").classList.add("active");
+    }, 0);
+
+    
+    // if(options && options.from) {
+    if(this.from === "website"){
       this.createWidgetContent();
       this.widgetIcon.classList.add("widget__hidden");
       this.closeIcon.classList.remove("widget__hidden");
@@ -151,49 +162,42 @@ class MessageWidget {
       this.buttonContainer.classList.add("btn-main-hidden");
       this.widgetContainer.appendChild(this.headerContainer);
       this.headerContainer.style.display = "none";
+      document.getElementById("prognosis_consultation_holder").classList.remove("hidden_module");;
       this.maximizeChatbox();
     }
   }
 
-  test() {
-    alert("Test")
-  }
-
-  // <div class="prognosis-sidebar-menu-wrapper" style="background-color: ${this.theme.sideMenuBgColor}">
-  //           ${PROGNOSIS_AI_LOGO}
-  //           <ul class="prognosis-sidebar-menu-list">
-  //             <li>
-  //               <div class="prognosis-menu-title">${CHT_ICON} <span>Chat</span></div>
-  //               <ul class="prognosis-menu-children">
-  //                 <li>New Chat</li>
-  //                 <li>Existing Chat</li>
-  //               </ul>
-  //             </li>
-  //           </ul>
-  //       </div>
-
   createWidgetContent() {
+    // <li is="menu-list-item" data-id="existingChat">Existing Chat</li>
     this.widgetContainer.innerHTML = `
     <div class="prognosis__wrapper">
       <div class="prognosis-sidebar-menu-wrapper" style="background-color: ${this.theme.secondaryColor}">
         <div class="aside-wrap">
-            ${PROGNOSIS_AI_LOGO}
+            ${PROGNOSIS_LOGO}
             <ul class="prognosis-sidebar-menu-list">
               <li>
                 <div class="prognosis-menu-title">${CHT_ICON} <span>Chat</span></div>
                 <ul class="prognosis-menu-children">
-                  <li is="menu-list-item" data-id="newChat">New Chat</li>
-                  <li is="menu-list-item" data-id="existingChat">Existing Chat</li>
+                  <li class="prognosis_main_nav_item" is="menu-list-item" data-id="newChat" id="menu_item_new_chat">New Chat</li>
+                </ul>
+              </li>
+              <li>
+                <div class="prognosis-menu-title">${SMART_TASK_ICON} <span>Smart Tasks</span></div>
+                <ul class="prognosis-menu-children">
+                  <li class="prognosis_main_nav_item" is="menu-list-item" data-id="medicalCoding" id="menu_item_medical_coding">Medical Coding</li>
                 </ul>
               </li>
             </ul>
           </div>
         </div>
-        <div class="prognosis__main-wrap">
-            <div class="prognosis__conslutation_holder" is="consultation-component" data-id="consultaton_comp_wrap"></div>
-          </div>
+        <div class="prognosis__main-wrap" id="prognosis___main_wrapper">
+          
+          <div class="prognosis_main_module hidden_module prognosis__conslutation_holder" id="prognosis_consultation_holder" is="consultation-component" data-id="consultaton_comp_wrap"></div>
+        </div>
     </div>
     `;
+
+    
   }
 
   submitChat() {
@@ -220,6 +224,7 @@ class MessageWidget {
       this.widgetContainer.appendChild(this.headerContainer);
       this.buttonContainer.classList.add("btn-main-hidden");
       this.widgetContainer.appendChild(this.headerContainer);
+      document.getElementById("prognosis_consultation_holder").classList.remove("hidden_module");
     } else {
       this.createWidgetContent();
       this.widgetIcon.classList.remove("widget__hidden");

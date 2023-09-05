@@ -29,8 +29,31 @@ class MainMenuListItem extends HTMLLIElement {
         
     }
 
+    hiddenModules() {
+        const allMainModules = document.querySelectorAll(".prognosis_main_module");
+        allMainModules.forEach(item => {
+            item.classList.add("hidden_module")
+        });
+    }
+
     get isExpanded() {
-        console.log("this.dataset.id", this.dataset.id);
+        const menuItems = document.querySelectorAll(".prognosis_main_nav_item");
+        menuItems.forEach(item => item.classList.remove("active"));
+
+        switch (this.dataset.id) {
+            case "newChat":
+                this.hiddenModules();
+                document.getElementById("prognosis_consultation_holder").classList.remove("hidden_module");
+                document.getElementById("menu_item_new_chat").classList.add("active");
+                break;
+            case "medicalCoding":
+                this.hiddenModules();
+                // document.getElementById("prognosis_consultation_holder").classList.remove("hidden_module");
+                document.getElementById("menu_item_medical_coding").classList.add("active");
+                break;
+            
+        }
+        
         return this.dataset.id
         // return this.dataset.expanded !== "false" && this.dataset.expanded != null;
     }

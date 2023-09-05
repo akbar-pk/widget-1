@@ -4,7 +4,35 @@ export const styles = `
         padding: 0;
         margin: 0;
     } 
-
+    .prognosis_logo_in_ai {
+        display: flex;
+        gap: 5px;
+    }
+    .hidden_module {
+        display: none !important;
+    }
+    .prognosis_pre_questions_wrapper {
+        padding: 30px 15px 15px 15px;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    .prognosis_pre_qa_wrapper {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 30px
+    }
+    .prognosis_pre_qa_wrapper .prognosis_pre_question_block {
+        min-width: 120px;
+        min-height: 100px;
+        border: 1px solid gray;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 15px;
+    }
     .prognotsis_clear_chat_btn {
         font-size: 11px;
         border-radius: 15px;
@@ -133,6 +161,9 @@ export const styles = `
         color: #000;
         margin: 74px 0 0 0;
     }
+    .prognosis-sidebar-menu-list > li {
+        margin-bottom: 25px;
+    }
     .prognosis-sidebar-menu-list .prognosis-menu-title {
         display: flex;
         align-items: center;
@@ -146,7 +177,7 @@ export const styles = `
     .prognosis-sidebar-menu-list .prognosis-menu-children {
         list-style: none;
         font-size: 15px;
-        margin: 18px 0 0 48px;
+        margin: 15px 0 0 48px;
     }
     .prognosis-sidebar-menu-list .prognosis-menu-children {
         line-height: 2
@@ -154,10 +185,18 @@ export const styles = `
     .prognosis-sidebar-menu-list .prognosis-menu-children li {
         cursor: pointer;
     }
+    .prognosis-sidebar-menu-list .prognosis-menu-children li.active {
+        background: lightgray;
+        border-radius: 15px;
+        padding-left: 10px;
+        margin-left: -10px;
+    }
     .prognosis-sidebar-menu-list ul li {
         color: #4C535D;
     }
-    
+    .prognosis_main_module {
+        height: 100%;
+    }
     .prognosis-chat-close-header {
         border-radius: 100rem;
         border: 1px solid #ccc;
