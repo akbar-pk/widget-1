@@ -1,26 +1,68 @@
-var x=Object.defineProperty;var b=(o,t,e)=>t in o?x(o,t,{enumerable:!0,configurable:!0,writable:!0,value:e}):o[t]=e;var l=(o,t,e)=>(b(o,typeof t!="symbol"?t+"":t,e),e);(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const i of document.querySelectorAll('link[rel="modulepreload"]'))s(i);new MutationObserver(i=>{for(const n of i)if(n.type==="childList")for(const r of n.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&s(r)}).observe(document,{childList:!0,subtree:!0});function e(i){const n={};return i.integrity&&(n.integrity=i.integrity),i.referrerPolicy&&(n.referrerPolicy=i.referrerPolicy),i.crossOrigin==="use-credentials"?n.credentials="include":i.crossOrigin==="anonymous"?n.credentials="omit":n.credentials="same-origin",n}function s(i){if(i.ep)return;i.ep=!0;const n=e(i);fetch(i.href,n)}})();const f=`
+var w=Object.defineProperty;var y=(o,t,e)=>t in o?w(o,t,{enumerable:!0,configurable:!0,writable:!0,value:e}):o[t]=e;var l=(o,t,e)=>(y(o,typeof t!="symbol"?t+"":t,e),e);(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const i of document.querySelectorAll('link[rel="modulepreload"]'))n(i);new MutationObserver(i=>{for(const s of i)if(s.type==="childList")for(const r of s.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&n(r)}).observe(document,{childList:!0,subtree:!0});function e(i){const s={};return i.integrity&&(s.integrity=i.integrity),i.referrerPolicy&&(s.referrerPolicy=i.referrerPolicy),i.crossOrigin==="use-credentials"?s.credentials="include":i.crossOrigin==="anonymous"?s.credentials="omit":s.credentials="same-origin",s}function n(i){if(i.ep)return;i.ep=!0;const s=e(i);fetch(i.href,s)}})();const v=`
     .widget__container * {
         box-sizing: border-box;
         padding: 0;
         margin: 0;
     } 
 
-    .prognosis_recording_wrapper {
-        margin-bottom: 15px;
+    .prognotsis_clear_chat_btn {
+        font-size: 11px;
+        border-radius: 15px;
+        padding: 5px;
+        border: unset;
+        cursor: pointer;
     }
 
-    .prognosis_start_record_btn {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        border: none;
+    .prognosis_chat_stop_btn {
+        width: 35px;
+        height: 35px;
+        border-radius: 100%;
+        border: unset;
+        cursor: pointer;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    .prognosis__chat_bubble_in {
+    .prognosis_recording_wrapper {
+        margin-bottom: 15px;
+    }
+
+    .prognosis_start_record_btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .prognosis_start_record_btn:hover, .prognosis__consult_submitBtn:hover {
+        opacity: 0.8;
+    }
+
+    .prognosis_start_record_btn svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .prognosis__chat_bubble_out {
         border: 1px solid blue;
+        border-radius: 20px;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    .prognosis__chat_bubble_user {
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: end;
+        width: 100%;
+    }
+    .prognosis__chat_bubble_user_inner {
+        max-width: 90%;
+        border: 1px solid green;
         border-radius: 20px;
         padding: 10px;
     }
@@ -234,7 +276,23 @@ var x=Object.defineProperty;var b=(o,t,e)=>t in o?x(o,t,{enumerable:!0,configura
     form button:hover {
         background-color: rgba(0, 0, 0, 95%);
     }
-`,_=`
+    ::-webkit-scrollbar {
+    width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+    background: #b0afaf;
+    border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    }
+`,B=`
     <svg xmlns="http://www.w3.org/2000/svg" width="150" height="30" viewBox="0 0 150 30" fill="none">
     <path d="M0 23.5511V2.76018H8.05911C9.98659 2.76018 11.5928 3.08906 12.8778 3.74682C14.1721 4.39504 15.1265 5.28159 15.7411 6.40645C16.365 7.53132 16.6769 8.80394 16.6769 10.2243C16.6769 11.6542 16.365 12.9316 15.7411 14.0565C15.1265 15.1718 14.1721 16.0584 12.8778 16.7161C11.5928 17.3643 9.98659 17.6885 8.05911 17.6885H4.39968V23.5511H0ZM4.39968 13.7133H8.22671C9.47445 13.7133 10.4335 13.3797 11.104 12.7124C11.7837 12.0355 12.1236 11.2062 12.1236 10.2243C12.1236 9.25198 11.7837 8.42739 11.104 7.75057C10.4335 7.07374 9.47445 6.73533 8.22671 6.73533H4.39968V13.7133Z" fill="#32365C"/>
     <path d="M18.9256 23.5511V9.19478H23.1577V11.1967C23.6512 10.6342 24.3589 10.1338 25.2807 9.69525C26.2119 9.24721 27.2268 8.98506 28.3256 8.9088L28.8424 13.0412C27.8554 13.0603 26.7845 13.1795 25.6299 13.3987C24.4753 13.6084 23.6512 13.9373 23.1577 14.3854V23.5511H18.9256Z" fill="#32365C"/>
@@ -248,22 +306,22 @@ var x=Object.defineProperty;var b=(o,t,e)=>t in o?x(o,t,{enumerable:!0,configura
     <path d="M147 6.08696C145.343 6.08696 144 4.72434 144 3.04348C144 1.36261 145.343 0 147 0C148.657 0 150 1.36261 150 3.04348C150 4.72434 148.657 6.08696 147 6.08696Z" fill="#0FA84F"/>
     <path d="M144.857 8.69565V23.913H148.714V8.69565H144.857Z" fill="#194CA6"/>
     </svg>
-`,w=`
+`,L=`
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
         <polyline points="22,6 12,13 2,6"></polyline>
     </svg>
-`,y=`
+`,E=`
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
         <line x1="18" y1="6" x2="6" y2="18"></line>
         <line x1="6" y1="6" x2="18" y2="18"></line>
     </svg>
-`,v=`
+`,H=`
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 <path d="M8.49998 18V15V14.5C9.33331 14.6667 11.8 14.9 15 14.5C18.2 14.1 18.6667 11 18.5 9.5H20C22 9.5 23.1667 11.1667 23.5 12V23H22L17.5 21H11C8.59998 21 8.33331 19 8.49998 18Z" fill="#E0E4E7"/>
 <path d="M20.6154 8.72002H19.0769V4.25537C19.0769 1.86982 17.7255 0 16 0H3.07692C1.35138 0 0 1.86982 0 4.25537V17.5422C0 18.3307 0.396308 18.991 1.00923 19.2252C1.15938 19.2825 1.312 19.3099 1.46462 19.3099C1.84 19.3099 2.20431 19.1392 2.47877 18.8215L5.648 15.1554H7.38338V18.3743C7.38338 20.2641 8.90092 21.8001 10.768 21.8001H16.688C16.9231 21.8001 17.7612 21.8225 18.0751 21.8499L21.8892 23.8916C22.0714 23.9651 22.2646 24 22.4554 24C22.7618 24 23.0646 23.9091 23.3255 23.7284C23.7477 23.4382 24 22.9536 24 22.4354V12.1457C24 10.256 22.4825 8.72002 20.6154 8.72002ZM5.41046 13.2868C5.02523 13.2868 4.66462 13.4587 4.39385 13.7714L1.84738 16.7175V4.25537C1.84738 2.88882 2.49723 1.86858 3.07815 1.86858H16.0012C16.5822 1.86858 17.232 2.88882 17.232 4.25537V10.8988C17.232 12.2666 16.5822 13.2868 16.0012 13.2868H5.41046ZM22.1538 21.9259L18.7348 20.0934C18.4234 19.9601 17.4498 19.9315 16.6892 19.9315H10.7692C9.92123 19.9315 9.23077 19.2326 9.23077 18.3743V15.1554H16C17.7255 15.1554 19.0769 13.2856 19.0769 10.8988V10.5886H20.6154C21.4634 10.5886 22.1538 11.2874 22.1538 12.1457V21.9259ZM14.4615 6.85145H4.61538C4.10585 6.85145 3.69231 6.43289 3.69231 5.91716C3.69231 5.40143 4.10585 4.98287 4.61538 4.98287H14.4615C14.9711 4.98287 15.3846 5.40143 15.3846 5.91716C15.3846 6.43289 14.9711 6.85145 14.4615 6.85145ZM15.3846 9.65431C15.3846 9.13859 14.9711 8.72002 14.4615 8.72002H4.61538C4.10585 8.72002 3.69231 9.13859 3.69231 9.65431C3.69231 10.17 4.10585 10.5886 4.61538 10.5886H14.4615C14.9711 10.5886 15.3846 10.17 15.3846 9.65431Z" fill="#37404F"/>
 </svg>
-`,L=`
+`,V=`
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -279,22 +337,26 @@ var x=Object.defineProperty;var b=(o,t,e)=>t in o?x(o,t,{enumerable:!0,configura
             >
             <line x1="22" y1="2" x2="11" y2="13"></line>
             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-            </svg>`,E=`
+            </svg>`,M=`
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path fill="#ffffff" fillRule="evenodd" clipRule="evenodd" d="M13 2.5H5C3.61929 2.5 2.5 3.61929 2.5 5V13C2.5 14.3807 3.61929 15.5 5 15.5H13C14.3807 15.5 15.5 14.3807 15.5 13V5C15.5 3.61929 14.3807 2.5 13 2.5ZM5 0C2.23858 0 0 2.23858 0 5V13C0 15.7614 2.23858 18 5 18H13C15.7614 18 18 15.7614 18 13V5C18 2.23858 15.7614 0 13 0H5Z"/>
+        </svg>`,T=`
 <svg xmlns="http://www.w3.org/2000/svg" width="27" height="40" viewBox="0 0 27 40" fill="none">
             <path d="M13.1376 26.4286H13.8482C14.8282 26.4305 15.7989 26.238 16.7048 25.8623C17.6108 25.4866 18.4341 24.935 19.1277 24.239C19.8213 23.5431 20.3716 22.7164 20.7471 21.8064C21.1225 20.8964 21.3158 19.9209 21.3158 18.9357V7.50715C21.3177 6.52198 21.1263 5.5461 20.7525 4.63538C20.3788 3.72465 19.8301 2.89696 19.1378 2.19967C18.4455 1.50238 17.6232 0.949181 16.718 0.571737C15.8127 0.194293 14.8424 1.18291e-05 13.8624 1.36196e-05H13.1518C12.1719 -0.0018647 11.2011 0.190558 10.2952 0.566268C9.38925 0.941978 8.56592 1.4936 7.8723 2.18956C7.17868 2.88553 6.62839 3.71217 6.25293 4.62217C5.87747 5.53218 5.68422 6.50769 5.68422 7.49287V18.9214C5.68235 19.9066 5.87376 20.8825 6.24749 21.7932C6.62123 22.7039 7.16994 23.5316 7.86224 24.2289C8.55454 24.9262 9.37683 25.4794 10.2821 25.8569C11.1873 26.2343 12.1576 26.4286 13.1376 26.4286ZM8.52632 7.49287C8.5282 6.26398 9.01464 5.08597 9.87902 4.21701C10.7434 3.34806 11.9152 2.85904 13.1376 2.85716H13.8482C14.4547 2.85622 15.0554 2.97538 15.6161 3.20784C16.1768 3.4403 16.6864 3.7815 17.116 4.21196C17.5455 4.64243 17.8865 5.15373 18.1194 5.71667C18.3524 6.27961 18.4728 6.88316 18.4737 7.49287V18.9214C18.4746 19.5311 18.3561 20.1351 18.1249 20.6987C17.8936 21.2624 17.5542 21.7747 17.126 22.2065C16.6978 22.6383 16.1892 22.9811 15.6292 23.2153C15.0693 23.4495 14.4689 23.5705 13.8624 23.5714H13.1518C12.5453 23.5724 11.9446 23.4532 11.3839 23.2208C10.8232 22.9883 10.3136 22.6471 9.88405 22.2166C9.45453 21.7862 9.11356 21.2749 8.8806 20.7119C8.64764 20.149 8.52726 19.5454 8.52632 18.9357V7.49287Z" fill="white"/>
             <path d="M27 18.5715C27 18.1926 26.8503 17.8292 26.5838 17.5613C26.3173 17.2934 25.9558 17.1429 25.5789 17.1429C25.2021 17.1429 24.8406 17.2934 24.5741 17.5613C24.3076 17.8292 24.1579 18.1926 24.1579 18.5715C24.1579 21.4131 23.035 24.1383 21.0363 26.1476C19.0375 28.1569 16.3266 29.2857 13.5 29.2857C10.6734 29.2857 7.96247 28.1569 5.96373 26.1476C3.96499 24.1383 2.84211 21.4131 2.84211 18.5715C2.84211 18.1926 2.69239 17.8292 2.42589 17.5613C2.15939 17.2934 1.79794 17.1429 1.42105 17.1429C1.04417 17.1429 0.682716 17.2934 0.416217 17.5613C0.149718 17.8292 0 18.1926 0 18.5715C0.000779712 21.9229 1.23512 25.1556 3.46526 27.6468C5.69541 30.138 8.76363 31.7115 12.0789 32.0643V32.1429V37.1429H7.10526C6.72838 37.1429 6.36693 37.2934 6.10043 37.5613C5.83393 37.8292 5.68421 38.1926 5.68421 38.5714C5.68421 38.9503 5.83393 39.3137 6.10043 39.5816C6.36693 39.8495 6.72838 40 7.10526 40H20.6053C20.9821 40 21.3436 39.8495 21.6101 39.5816C21.8766 39.3137 22.0263 38.9503 22.0263 38.5714C22.0263 38.1926 21.8766 37.8292 21.6101 37.5613C21.3436 37.2934 20.9821 37.1429 20.6053 37.1429H14.9211V32.1429C14.9211 32.1429 14.9211 32.0929 14.9211 32.0643C18.2364 31.7115 21.3046 30.138 23.5347 27.6468C25.7649 25.1556 26.9992 21.9229 27 18.5715Z" fill="white"/>
-        </svg>`;class B extends HTMLUListElement{constructor(){super(),this.style.position="relative",this.style.paddingLeft="30px",this.style.paddingTop="30px",this.toggleBtn=document.createElement("button"),this.toggleBtn.style.position="absolute",this.toggleBtn.style.border="none",this.toggleBtn.style.top="0",this.toggleBtn.style.top="5px",this.toggleBtn.style.cursor="pointer",this.toggleBtn.innerText="Test Button",this.toggleBtn.addEventListener("click",()=>{this.dataset.expanded=!this.isExpanded}),this.appendChild(this.toggleBtn)}get isExpanded(){return this.dataset.expanded!=="false"&&this.dataset.expanded!=null}static get observedAttributes(){return["data-expanded"]}attributeChangedCallback(t,e,s){console.log("name EXP, oldValue EXP, newValue EXP",t,e,s),this.updateStyles()}connectedCallback(){this.updateStyles()}updateStyles(){const t=this.isExpanded?"rotate(90deg)":"";this.toggleBtn.style.transform=t,[...this.children].forEach(e=>{e!==this.toggleBtn&&(e.style.display=this.isExpanded?"":"none")})}}customElements.define("expandable-list",B,{extends:"ul"});class H extends HTMLLIElement{constructor(){super(),this.style.position="relative",this.toggleBtn=document.createElement("button"),this.toggleBtn.style.position="absolute",this.toggleBtn.style.border="none",this.toggleBtn.style.background="transparent",this.toggleBtn.style.width="100%",this.toggleBtn.style.height="100%",this.toggleBtn.style.left="0",this.toggleBtn.style.top="0px",this.toggleBtn.style.cursor="pointer",this.toggleBtn.innerText="",this.toggleBtn.addEventListener("click",()=>{this.isExpanded}),this.appendChild(this.toggleBtn)}get isExpanded(){return console.log("this.dataset.id",this.dataset.id),this.dataset.id}static get observedAttributes(){return["data-expanded"]}attributeChangedCallback(t,e,s){console.log("name EXP, oldValue EXP, newValue EXP",t,e,s),this.updateStyles()}connectedCallback(){this.updateStyles()}updateStyles(){console.log("coming")}}customElements.define("menu-list-item",H,{extends:"li"});class M extends HTMLDivElement{constructor(){super(),this.theme=JSON.parse(localStorage.getItem("prognosisTheme")),console.log("this.options",this.theme.primaryColor),this.currentOutput="",this.inputValue="",this.displayArea=document.createElement("div"),this.displayArea.classList.add("prognosis__consult_display_area"),this.displayArea.classList.add("prognosis__display_area"),this.chatBubble=document.createElement("div"),this.chatBubble.classList.add("prognosis__chat_bubble_in"),this.inputBox=document.createElement("TEXTAREA"),this.inputBox.classList.add("prognosis__consult_inputbox"),this.inputBox.addEventListener("keyup",e=>{this.inputValue=e.target.value,console.log("this.inputValue",this.inputValue),console.log("e",e.target.value)});const t=`
+        </svg>`;class k extends HTMLUListElement{constructor(){super(),this.style.position="relative",this.style.paddingLeft="30px",this.style.paddingTop="30px",this.toggleBtn=document.createElement("button"),this.toggleBtn.style.position="absolute",this.toggleBtn.style.border="none",this.toggleBtn.style.top="0",this.toggleBtn.style.top="5px",this.toggleBtn.style.cursor="pointer",this.toggleBtn.innerText="Test Button",this.toggleBtn.addEventListener("click",()=>{this.dataset.expanded=!this.isExpanded}),this.appendChild(this.toggleBtn)}get isExpanded(){return this.dataset.expanded!=="false"&&this.dataset.expanded!=null}static get observedAttributes(){return["data-expanded"]}attributeChangedCallback(t,e,n){console.log("name EXP, oldValue EXP, newValue EXP",t,e,n),this.updateStyles()}connectedCallback(){this.updateStyles()}updateStyles(){const t=this.isExpanded?"rotate(90deg)":"";this.toggleBtn.style.transform=t,[...this.children].forEach(e=>{e!==this.toggleBtn&&(e.style.display=this.isExpanded?"":"none")})}}customElements.define("expandable-list",k,{extends:"ul"});class I extends HTMLLIElement{constructor(){super(),this.style.position="relative",this.toggleBtn=document.createElement("button"),this.toggleBtn.style.position="absolute",this.toggleBtn.style.border="none",this.toggleBtn.style.background="transparent",this.toggleBtn.style.width="100%",this.toggleBtn.style.height="100%",this.toggleBtn.style.left="0",this.toggleBtn.style.top="0px",this.toggleBtn.style.cursor="pointer",this.toggleBtn.innerText="",this.toggleBtn.addEventListener("click",()=>{this.isExpanded}),this.appendChild(this.toggleBtn)}get isExpanded(){return console.log("this.dataset.id",this.dataset.id),this.dataset.id}static get observedAttributes(){return["data-expanded"]}attributeChangedCallback(t,e,n){console.log("name EXP, oldValue EXP, newValue EXP",t,e,n),this.updateStyles()}connectedCallback(){this.updateStyles()}updateStyles(){console.log("coming")}}customElements.define("menu-list-item",I,{extends:"li"});class O extends HTMLDivElement{constructor(){super(),this.theme=JSON.parse(localStorage.getItem("prognosisTheme")),console.log("this.options",this.theme.primaryColor),this.currentOutput="",this.inputValue="",this.displayArea=document.createElement("div"),this.displayArea.classList.add("prognosis__consult_display_area"),this.displayArea.classList.add("prognosis__display_area"),this.chatBubble=document.createElement("div"),this.chatBubble.classList.add("prognosis__chat_bubble_out"),this.userChatBubble=document.createElement("div"),this.userChatBubble.classList.add("prognosis__chat_bubble_user"),this.userChatBubbleInner=document.createElement("div"),this.userChatBubbleInner.classList.add("prognosis__chat_bubble_user_inner"),this.inputBox=document.createElement("TEXTAREA"),this.inputBox.classList.add("prognosis__consult_inputbox"),this.inputBox.addEventListener("keyup",e=>{this.inputValue=e.target.value,console.log("this.inputValue",this.inputValue),console.log("e",e.target.value)}),this.inputBox.addEventListener("keyup",e=>{e.key==="Enter"&&this.processMessageToChatGPT()});const t=`
             background-color: ${this.theme.primaryColor};
             color: ${this.theme.btnTextColor};
-        `;this.submitBtn=document.createElement("button"),this.submitBtn.classList.add("prognosis__consult_submitBtn"),this.submitBtn.setAttribute("style",t),this.submitBtn.innerHTML=L,this.submitBtn.addEventListener("click",()=>{this.processMessageToChatGPT()}),this.textInputWrapper=document.createElement("div"),this.textInputWrapper.classList.add("prognosis_text_input_wrapper"),this.textInputWrapper.appendChild(this.inputBox),this.textInputWrapper.appendChild(this.submitBtn),this.recordingWrapper=document.createElement("div"),this.recordingWrapper.classList.add("prognosis_recording_wrapper"),this.startRecordBtn=document.createElement("button"),this.startRecordBtn.classList.add("prognosis_start_record_btn"),this.startRecordBtn.style.backgroundColor=this.theme.primaryColor,this.startRecordBtn.innerHTML=E,this.recordingWrapper.appendChild(this.startRecordBtn),this.inputWrapper=document.createElement("div"),this.inputWrapper.classList.add("prognosis__consult_wrap"),this.inputWrapper.appendChild(this.recordingWrapper),this.inputWrapper.appendChild(this.textInputWrapper),this.appendChild(this.displayArea),this.appendChild(this.inputWrapper),this.API_KEY=localStorage.getItem("prognosisOAKey")}get consult(){console.log("get consult")}async processMessageToChatGPT(){var i;let t="";t=this.inputValue;let e=this.chatBubble.cloneNode(!0);this.displayArea.appendChild(e);const s={model:"gpt-3.5-turbo",messages:[{role:"user",content:t}],stream:!0};console.log("apiRequestBody",s);try{const r=(i=(await fetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{Authorization:"Bearer "+this.API_KEY,"Content-Type":"application/json"},body:JSON.stringify(s)})).body)==null?void 0:i.getReader(),d=new TextDecoder("utf-8");for(;;){const g=await(r==null?void 0:r.read()),{done:O,value:C}=g,h=d.decode(C).split(`
-`).map(a=>a.replace(/^data: /,"").trim()).filter(a=>a!==""&&a!=="[DONE]").map(a=>JSON.parse(a));console.log("parsedLines",h);const F={message:t,direction:"outgoing",sender:"user"};for(const a of h){const{choices:u}=a,{delta:m}=u[0],{content:c}=m;if(console.log("content ltst",c),c){let p="";p+=c,this.currentOutput+=p,console.log("contscontscontsconts",p),e.innerText=this.currentOutput,console.log("clonedBubble",e.innerHTML),console.log("contscontscontsconts",{message:p,sentTime:"just now",sender:"Prognosis"})}}}}catch{}finally{}}}customElements.define("consultation-component",M,{extends:"div"});class V{constructor(t){l(this,"position","");l(this,"open",!1);l(this,"widgetContainer",null);l(this,"headerContainer",null);l(this,"buttonContainer",null);this.defaultTheme={primaryColor:"red",secondaryColor:"rgb(239, 241, 247)",sideMenuBgColor:"#F5F6F7",btnTextColor:"#ffffff",position:"bottom-right"},this.theme=t.theme?t.theme:this.defaultTheme,localStorage.setItem("prognosisTheme",JSON.stringify(this.theme)),console.log("options.prognosisOAKey",t),localStorage.setItem("prognosisOAKey",t.prognosisOAKey),this.position=this.getPosition(this.theme.position),this.open=!1,this.initialize(),this.injectStyles(),console.log("options",this.theme)}getPosition(t){const[e,s]=t.split("-");return{[e]:"30px",[s]:"30px"}}async initialize(){window.TestFunc=function(){alert(window.PROGNOSIS_WID)};const t=document.createElement("div");t.style.position="fixed",t.style.zIndex="123456789012",Object.keys(this.position).forEach(d=>t.style[d]=this.position[d]),document.body.appendChild(t),this.headerContainer=document.createElement("div"),this.headerContainer.classList.add("prognosis-chat-header");const e=document.createElement("button");e.style.cursor="pointer",e.style.marginRight="20px",e.innerText="<>",e.classList.add("prognosis-chat-maximize-header"),e.classList.add("prognosis-chat-close-header"),e.addEventListener("click",this.maximizeChatbox.bind(this)),this.headerContainer.appendChild(e);const s=document.createElement("button");s.style.cursor="pointer",s.innerText="x",s.classList.add("prognosis-chat-close-header"),s.addEventListener("click",this.toggleOpen.bind(this)),this.headerContainer.appendChild(s),this.buttonContainer=document.createElement("button"),this.buttonContainer.style.backgroundColor=this.theme.primaryColor,this.buttonContainer.classList.add("button__container");const i=document.createElement("button");i.classList.add("submit__container"),i.innerHTML="Submit",i.addEventListener("click",function(){window.TestFunc()});const n=document.createElement("span");n.innerHTML=w,n.classList.add("widget__icon"),this.widgetIcon=n;const r=document.createElement("span");r.innerHTML=y,r.classList.add("widget__icon","widget__hidden"),this.closeIcon=r,this.buttonContainer.appendChild(this.widgetIcon),this.buttonContainer.appendChild(this.closeIcon),this.buttonContainer.addEventListener("click",this.toggleOpen.bind(this)),this.widgetContainer=document.createElement("div"),this.widgetContainer.classList.add("widget__hidden","widget__container"),this.createWidgetContent(),t.appendChild(this.widgetContainer),t.appendChild(this.buttonContainer)}test(){alert("Test")}createWidgetContent(){this.widgetContainer.innerHTML=`
+            fill: ${this.theme.btnTextColor};
+        `;this.submitBtn=document.createElement("button"),this.submitBtn.classList.add("prognosis__consult_submitBtn"),this.submitBtn.innerHTML=V,this.submitBtn.setAttribute("style",t),this.submitBtn.addEventListener("click",()=>{this.processMessageToChatGPT()}),this.chatStopBtn=document.createElement("button"),this.chatStopBtn.classList.add("prognosis_chat_stop_btn"),this.chatStopBtn.innerHTML=M,this.chatStopBtn.setAttribute("style",t),this.chatStopBtn.style.display="none",this.chatStopBtn.addEventListener("click",()=>{this.controller&&(this.controller.abort(),this.controller=null,this.clearChatBtn.style.display="flex")}),this.clearChatBtn=document.createElement("button"),this.clearChatBtn.classList.add("prognotsis_clear_chat_btn"),this.clearChatBtn.setAttribute("style",t),this.clearChatBtn.innerText="Clear Chat",this.clearChatBtn.addEventListener("click",()=>{this.displayArea.innerHTML="",this.clearChatBtn.style.display="none"}),this.clearChatBtn.style.display="none",this.textInputWrapper=document.createElement("div"),this.textInputWrapper.classList.add("prognosis_text_input_wrapper"),this.textInputWrapper.appendChild(this.inputBox),this.textInputWrapper.appendChild(this.submitBtn),this.textInputWrapper.appendChild(this.chatStopBtn),this.textInputWrapper.appendChild(this.clearChatBtn),this.recordingWrapper=document.createElement("div"),this.recordingWrapper.classList.add("prognosis_recording_wrapper"),this.startRecordBtn=document.createElement("button"),this.startRecordBtn.classList.add("prognosis_start_record_btn"),this.startRecordBtn.style.backgroundColor=this.theme.primaryColor,this.startRecordBtn.innerHTML=T,this.recordingWrapper.appendChild(this.startRecordBtn),this.inputWrapper=document.createElement("div"),this.inputWrapper.classList.add("prognosis__consult_wrap"),this.inputWrapper.appendChild(this.recordingWrapper),this.inputWrapper.appendChild(this.textInputWrapper),this.appendChild(this.displayArea),this.appendChild(this.inputWrapper),this.API_KEY=localStorage.getItem("prognosisOAKey"),this.controller=null}get consult(){console.log("get consult")}async processMessageToChatGPT(){var e;let t="";if(t=this.inputValue,t.trim().length){this.chatStopBtn.style.display="flex",this.submitBtn.style.display="none";let n=this.chatBubble.cloneNode(!0),i=this.userChatBubble.cloneNode(!0),s=this.userChatBubbleInner.cloneNode(!0);i.appendChild(s),this.displayArea.appendChild(i),s.innerText=t,this.displayArea.appendChild(n),this.inputBox.value="",this.inputValue="";const r={model:"gpt-3.5-turbo",messages:[{role:"user",content:t}],stream:!0};console.log("apiRequestBody",r),this.controller=new AbortController;const d=this.controller.signal;try{const p=(e=(await fetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{Authorization:"Bearer "+this.API_KEY,"Content-Type":"application/json"},body:JSON.stringify(r),signal:d})).body)==null?void 0:e.getReader(),C=new TextDecoder("utf-8");for(;;){const m=await(p==null?void 0:p.read()),{done:b,value:x}=m;if(b){this.clearChatBtn.style.display="flex";break}const g=C.decode(x).split(`
+`).map(a=>a.replace(/^data: /,"").trim()).filter(a=>a!==""&&a!=="[DONE]").map(a=>JSON.parse(a));console.log("parsedLines",g);const W={message:t,direction:"outgoing",sender:"user"};for(const a of g){const{choices:f}=a,{delta:_}=f[0],{content:c}=_;if(console.log("content ltst",c),c){let h="";h+=c,this.currentOutput+=h,console.log("contscontscontsconts",h),n.innerText=this.currentOutput;const P={message:h,sentTime:"just now",sender:"Prognosis"};setTimeout(()=>{this.displayArea.scrollTop=this.displayArea.scrollHeight},100)}}}}catch(u){d.aborted?console.log("Request aborted!"):(console.log("Error occured while generating."),console.log("Error ",u))}finally{this.chatStopBtn.style.display="none",this.submitBtn.style.display="flex",this.controller=null,this.inputBox.value="",this.inputValue=""}}else alert("Please enter a message")}}customElements.define("consultation-component",O,{extends:"div"});class S{constructor(t){l(this,"position","");l(this,"open",!1);l(this,"widgetContainer",null);l(this,"headerContainer",null);l(this,"buttonContainer",null);this.defaultTheme={primaryColor:"red",secondaryColor:"rgb(239, 241, 247)",sideMenuBgColor:"#F5F6F7",btnTextColor:"#ffffff",position:"bottom-right"},this.theme=t.theme?t.theme:this.defaultTheme,localStorage.setItem("prognosisTheme",JSON.stringify(this.theme)),console.log("options.prognosisOAKey",t),localStorage.setItem("prognosisOAKey",t.prognosisOAKey),this.position=this.getPosition(this.theme.position),this.open=!1,this.initialize(),this.injectStyles(),console.log("options",this.theme)}getPosition(t){const[e,n]=t.split("-");return{[e]:"30px",[n]:"30px"}}async initialize(){window.TestFunc=function(){alert(window.PROGNOSIS_WID)};const t=document.createElement("div");t.style.position="fixed",t.style.zIndex="123456789012",Object.keys(this.position).forEach(d=>t.style[d]=this.position[d]),document.body.appendChild(t),this.headerContainer=document.createElement("div"),this.headerContainer.classList.add("prognosis-chat-header");const e=document.createElement("button");e.style.cursor="pointer",e.style.marginRight="20px",e.innerText="<>",e.classList.add("prognosis-chat-maximize-header"),e.classList.add("prognosis-chat-close-header"),e.addEventListener("click",this.maximizeChatbox.bind(this)),this.headerContainer.appendChild(e);const n=document.createElement("button");n.style.cursor="pointer",n.innerText="x",n.classList.add("prognosis-chat-close-header"),n.addEventListener("click",this.toggleOpen.bind(this)),this.headerContainer.appendChild(n),this.buttonContainer=document.createElement("button"),this.buttonContainer.style.backgroundColor=this.theme.primaryColor,this.buttonContainer.classList.add("button__container");const i=document.createElement("button");i.classList.add("submit__container"),i.innerHTML="Submit",i.addEventListener("click",function(){window.TestFunc()});const s=document.createElement("span");s.innerHTML=L,s.classList.add("widget__icon"),this.widgetIcon=s;const r=document.createElement("span");r.innerHTML=E,r.classList.add("widget__icon","widget__hidden"),this.closeIcon=r,this.buttonContainer.appendChild(this.widgetIcon),this.buttonContainer.appendChild(this.closeIcon),this.buttonContainer.addEventListener("click",this.toggleOpen.bind(this)),this.widgetContainer=document.createElement("div"),this.widgetContainer.classList.add("widget__hidden","widget__container"),this.createWidgetContent(),t.appendChild(this.widgetContainer),t.appendChild(this.buttonContainer)}test(){alert("Test")}createWidgetContent(){this.widgetContainer.innerHTML=`
     <div class="prognosis__wrapper">
       <div class="prognosis-sidebar-menu-wrapper" style="background-color: ${this.theme.secondaryColor}">
         <div class="aside-wrap">
-            ${_}
+            ${B}
             <ul class="prognosis-sidebar-menu-list">
               <li>
-                <div class="prognosis-menu-title">${v} <span>Chat</span></div>
+                <div class="prognosis-menu-title">${H} <span>Chat</span></div>
                 <ul class="prognosis-menu-children">
                   <li is="menu-list-item" data-id="newChat">New Chat</li>
                   <li is="menu-list-item" data-id="existingChat">Existing Chat</li>
@@ -307,4 +369,4 @@ var x=Object.defineProperty;var b=(o,t,e)=>t in o?x(o,t,{enumerable:!0,configura
             <div class="prognosis__conslutation_holder" is="consultation-component" data-id="consultaton_comp_wrap"></div>
           </div>
     </div>
-    `}submitChat(){alert("clicked")}injectStyles(){const t=document.createElement("style");t.innerHTML=f.replace(/^\s+|\n/gm,""),document.head.appendChild(t)}maximizeChatbox(){this.widgetContainer.classList.contains("full-width")?this.widgetContainer.classList.remove("full-width"):this.widgetContainer.classList.add("full-width")}toggleOpen(){this.open=!this.open,this.open?(this.widgetIcon.classList.add("widget__hidden"),this.closeIcon.classList.remove("widget__hidden"),this.widgetContainer.classList.remove("widget__hidden"),this.widgetContainer.appendChild(this.headerContainer),this.buttonContainer.classList.add("btn-main-hidden"),this.widgetContainer.appendChild(this.headerContainer),console.log("this.buttonContainer 1",this.buttonContainer)):(this.createWidgetContent(),this.widgetIcon.classList.remove("widget__hidden"),this.closeIcon.classList.add("widget__hidden"),this.widgetContainer.classList.add("widget__hidden"),this.buttonContainer.classList.remove("btn-main-hidden"),console.log("this.buttonContainer 2",this.buttonContainer))}}function T(o){return new V(o)}window.IntPrognosisWidget=T;
+    `}submitChat(){alert("clicked")}injectStyles(){const t=document.createElement("style");t.innerHTML=v.replace(/^\s+|\n/gm,""),document.head.appendChild(t)}maximizeChatbox(){this.widgetContainer.classList.contains("full-width")?this.widgetContainer.classList.remove("full-width"):this.widgetContainer.classList.add("full-width")}toggleOpen(){this.open=!this.open,this.open?(this.widgetIcon.classList.add("widget__hidden"),this.closeIcon.classList.remove("widget__hidden"),this.widgetContainer.classList.remove("widget__hidden"),this.widgetContainer.appendChild(this.headerContainer),this.buttonContainer.classList.add("btn-main-hidden"),this.widgetContainer.appendChild(this.headerContainer),console.log("this.buttonContainer 1",this.buttonContainer)):(this.createWidgetContent(),this.widgetIcon.classList.remove("widget__hidden"),this.closeIcon.classList.add("widget__hidden"),this.widgetContainer.classList.add("widget__hidden"),this.buttonContainer.classList.remove("btn-main-hidden"),console.log("this.buttonContainer 2",this.buttonContainer))}}function A(o){return new S(o)}window.IntPrognosisWidget=A;

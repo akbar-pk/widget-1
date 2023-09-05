@@ -5,22 +5,64 @@ export const styles = `
         margin: 0;
     } 
 
-    .prognosis_recording_wrapper {
-        margin-bottom: 15px;
+    .prognotsis_clear_chat_btn {
+        font-size: 11px;
+        border-radius: 15px;
+        padding: 5px;
+        border: unset;
+        cursor: pointer;
     }
 
-    .prognosis_start_record_btn {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        border: none;
+    .prognosis_chat_stop_btn {
+        width: 35px;
+        height: 35px;
+        border-radius: 100%;
+        border: unset;
+        cursor: pointer;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    .prognosis__chat_bubble_in {
+    .prognosis_recording_wrapper {
+        margin-bottom: 15px;
+    }
+
+    .prognosis_start_record_btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .prognosis_start_record_btn:hover, .prognosis__consult_submitBtn:hover {
+        opacity: 0.8;
+    }
+
+    .prognosis_start_record_btn svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .prognosis__chat_bubble_out {
         border: 1px solid blue;
+        border-radius: 20px;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    .prognosis__chat_bubble_user {
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: end;
+        width: 100%;
+    }
+    .prognosis__chat_bubble_user_inner {
+        max-width: 90%;
+        border: 1px solid green;
         border-radius: 20px;
         padding: 10px;
     }
@@ -233,6 +275,22 @@ export const styles = `
     }
     form button:hover {
         background-color: rgba(0, 0, 0, 95%);
+    }
+    ::-webkit-scrollbar {
+    width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+    background: #b0afaf;
+    border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+    background: #555;
     }
 `;
 
