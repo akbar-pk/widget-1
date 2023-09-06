@@ -10,7 +10,7 @@ import "./Components/ChatModules/Explain.js";
 
 class MessageWidget {
   constructor(options) { 
-    this.from = "website";
+    this.from = options.from;
     this.defaultTheme = {
       primaryColor: "red",
       secondaryColor: "rgb(239, 241, 247)",
