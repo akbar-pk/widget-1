@@ -1,12 +1,34 @@
 import { RECORDING_ICON, SEND_ICON, START_RECORD_ICON, STOP_RECORD_ICON } from "../../svgIcons.js";
 
-class Consultation extends HTMLDivElement {
+class MedicaCoding extends HTMLDivElement {
     constructor() {
         super();
         this.theme = JSON.parse(localStorage.getItem("prognosisTheme"));
         console.log("this.options", this.theme.primaryColor);
         this.currentOutput = "";
         this.inputValue = "";
+
+        // Pre-defined questions
+        this.questions = [
+            {
+                title: "ICD-10-CM"
+            },
+            {
+                title: "CPT"
+            },
+            {
+                title: "HCPCS"
+            },
+            {
+                title: "DRG"
+            },
+            {
+                title: "SNOMED CT"
+            },
+            {
+                title: "LOINC"
+            }
+        ];
 
         // Chat loader 
         const loaderHolderStyle = `
@@ -36,27 +58,8 @@ class Consultation extends HTMLDivElement {
         this.loaderBar = document.createElement("div");
         this.loaderBar.classList.add("prognosis_message_loader_bar");
         this.loaderBar.setAttribute("style", loaderBarStyle);
-        this.loaderWrapper.appendChild(this.loaderBar);
+        this.loaderWrapper.appendChild(this.loaderBar)
         // Chat loader END
-
-        // Pre-defined questions
-        this.questions = [
-            {
-                title: "What is Atrial Fibrillation?"
-            },
-            {
-                title: "What is Stroke?"
-            },
-            {
-                title: "What is HF Stage B?"
-            },
-            {
-                title: "What is Hypertension?"
-            },
-            {
-                title: "What is what is Anaemia?"
-            }
-        ];
 
         this.questionsWrapper = document.createElement("div");
         this.generateQuestion(this.questions);
@@ -124,13 +127,14 @@ class Consultation extends HTMLDivElement {
             }
         });
 
+            // // Clear Chat
+
             const grayButtonStyle = `
                 background-color: lightgray;
                 color: gray;
                 fill: gray;
             `;
 
-            // // Clear Chat
             this.clearChatBtn = document.createElement("button");
             this.clearChatBtn.classList.add("prognotsis_clear_chat_btn");
             this.clearChatBtn.setAttribute("style", grayButtonStyle);
@@ -190,6 +194,7 @@ class Consultation extends HTMLDivElement {
     }
 
     async processMessageToChatGPT() {
+        
         let inputMsg = "";
         inputMsg = this.inputValue;
         
@@ -206,16 +211,14 @@ class Consultation extends HTMLDivElement {
             this.displayArea.appendChild(cloneUserChatBubble);
             cloneUserChatBubbleInner.innerText = inputMsg;
             this.displayArea.appendChild(clonedBubble);
-            
             this.displayArea.appendChild(this.loaderWrapper);
-            // clonedBubble.appendChild(this.messageLoader);
 
             this.inputBox.value = "";
             this.inputValue = "";
 
         const apiRequestBody = {
             "model": "gpt-3.5-turbo",
-            "messages": [{role: "user", content: inputMsg}],
+            "messages": [{role: "user", content: "what is " + inputMsg + " in medical"}],
             stream: true
           }
 
@@ -305,13 +308,11 @@ class Consultation extends HTMLDivElement {
         } catch(error) {
             if(signal.aborted) {
                 console.log("Request aborted!");
-                this.loaderWrapper.remove()
             } else {
                 console.log("Error occured while generating.");
                 console.log("Error ", error);
-                this.loaderWrapper.remove()
             }
-        
+            this.loaderWrapper.remove();
           } finally {
             this.chatStopBtn.style.display = "none"; 
             this.submitBtn.style.display = "flex";
@@ -353,6 +354,6 @@ class Consultation extends HTMLDivElement {
     }
 }
 
-customElements.define("consultation-component", Consultation, {
+customElements.define("medical-coding", MedicaCoding, {
    extends: "div"
 })

@@ -48,8 +48,14 @@ class MainMenuListItem extends HTMLLIElement {
                 break;
             case "medicalCoding":
                 this.hiddenModules();
-                // document.getElementById("prognosis_consultation_holder").classList.remove("hidden_module");
+                document.getElementById("prognosis_medical_coding_holder").classList.remove("hidden_module");
                 document.getElementById("menu_item_medical_coding").classList.add("active");
+                break;
+            case "explain":
+                this.hiddenModules();
+                document.getElementById("prognosis_explain_holder").classList.remove("hidden_module");
+                document.getElementById("menu_item_explain").classList.add("active");
+                
                 break;
             
         }

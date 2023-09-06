@@ -20,11 +20,14 @@ export const styles = `
     .prognosis_pre_qa_wrapper {
         display: grid;
         grid-template-columns: auto auto auto;
-        gap: 30px
+        gap: 30px;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
     }
     .prognosis_pre_qa_wrapper .prognosis_pre_question_block {
         min-width: 120px;
-        min-height: 100px;
+        min-height: 70px;
         border: 1px solid gray;
         padding: 10px;
         display: flex;
@@ -32,6 +35,9 @@ export const styles = `
         align-items: center;
         cursor: pointer;
         border-radius: 15px;
+    }
+    .prognosis_pre_qa_wrapper .prognosis_pre_question_block:hover {
+        backgound: red;
     }
     .prognotsis_clear_chat_btn {
         font-size: 11px;
@@ -54,6 +60,11 @@ export const styles = `
 
     .prognosis_recording_wrapper {
         margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 13px;
     }
 
     .prognosis_start_record_btn {
@@ -65,6 +76,7 @@ export const styles = `
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        margin-bottom: 15px;
     }
 
     .prognosis_start_record_btn:hover, .prognosis__consult_submitBtn:hover {
@@ -114,14 +126,17 @@ export const styles = `
         display: flex;
         align-items: center;
         gap: 10px;
+        width: 90%;
+        max-width: 546px;
     }
     .prognosis__consult_inputbox {
         border-radius: 30px;
         border: 1px solid #ccc;
         padding: 15px;
         height: 50px;
-        width: 300px;
+        width: 84%;
         overflow: hidden;
+        max-width: 546px;
     }
     .prognosis__consult_inputbox:focus-visible {
         border: 1px solid gray !important;
@@ -315,6 +330,47 @@ export const styles = `
     form button:hover {
         background-color: rgba(0, 0, 0, 95%);
     }
+
+    .hide_section {
+        display: none !important;
+    }
+
+    @keyframes chat-typing-bar {
+        0% {
+          width: 8px;
+        }
+        25% {
+          width: calc(100% - 10px);
+        }
+        50% {
+          width: 8px;
+        }
+        75% {
+          width: calc(100% - 10px);
+        }
+        100% {
+          width: 8px;
+        }
+        25% {
+          left: 5px;
+        }
+        50% {
+          left: calc(100% - 13px);
+        }
+        75% {
+          left: 5px;
+        }
+        0% {
+          background: blue;
+        }
+        50% {
+          background: green;
+        }
+        100% {
+          background: #65B360;
+        }
+      }
+
     ::-webkit-scrollbar {
     width: 10px;
     }

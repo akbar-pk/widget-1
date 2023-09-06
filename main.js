@@ -5,6 +5,8 @@ import { PROGNOSIS_AI_LOGO, CLOSE_ICON, MESSAGE_ICON, CHT_ICON, PROGNOSIS_LOGO, 
 import "./Components/MainMenuListItem.js";
 import "./Components/ChatModules/Consultation.js";
 import "./Components/ChatModules/PreDefinedQuestions.js";
+import "./Components/ChatModules/MedicalCoding.js";
+import "./Components/ChatModules/Explain.js";
 
 class MessageWidget {
   constructor(options) { 
@@ -173,7 +175,7 @@ class MessageWidget {
     <div class="prognosis__wrapper">
       <div class="prognosis-sidebar-menu-wrapper" style="background-color: ${this.theme.secondaryColor}">
         <div class="aside-wrap">
-            ${PROGNOSIS_LOGO}
+            <a href="https://myprognosis.ai/">${PROGNOSIS_LOGO}</a>
             <ul class="prognosis-sidebar-menu-list">
               <li>
                 <div class="prognosis-menu-title">${CHT_ICON} <span>Chat</span></div>
@@ -185,15 +187,17 @@ class MessageWidget {
                 <div class="prognosis-menu-title">${SMART_TASK_ICON} <span>Smart Tasks</span></div>
                 <ul class="prognosis-menu-children">
                   <li class="prognosis_main_nav_item" is="menu-list-item" data-id="medicalCoding" id="menu_item_medical_coding">Medical Coding</li>
-                </ul>
+                  <li class="prognosis_main_nav_item" is="menu-list-item" data-id="explain" id="menu_item_explain">Explain</li>
+                  </ul>
               </li>
             </ul>
           </div>
         </div>
         <div class="prognosis__main-wrap" id="prognosis___main_wrapper">
-          
+          <div class="prognosis_main_module hidden_module prognosis__medical_coding_holder" id="prognosis_medical_coding_holder" is="medical-coding"></div>
           <div class="prognosis_main_module hidden_module prognosis__conslutation_holder" id="prognosis_consultation_holder" is="consultation-component" data-id="consultaton_comp_wrap"></div>
-        </div>
+          <div class="prognosis_main_module hidden_module prognosis__explain_holder" id="prognosis_explain_holder" is="explain-component"></div>
+          </div>
     </div>
     `;
 
@@ -239,5 +243,18 @@ function initializeWidget(position) {
   return new MessageWidget(position);
   
 }
+
+const options = {
+  prognosisOAKey : "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",
+  theme: {
+    primaryColor: "green",
+    secondaryColor: "#F5F6F7",
+    btnTextColor: "#ffffff",
+    position: "bottom-right"
+  }
+  
+};
+
+initializeWidget(options);
 
 window.IntPrognosisWidget = initializeWidget;

@@ -1,6 +1,6 @@
 import { RECORDING_ICON, SEND_ICON, START_RECORD_ICON, STOP_RECORD_ICON } from "../../svgIcons.js";
 
-class Consultation extends HTMLDivElement {
+class Explain extends HTMLDivElement {
     constructor() {
         super();
         this.theme = JSON.parse(localStorage.getItem("prognosisTheme"));
@@ -42,19 +42,19 @@ class Consultation extends HTMLDivElement {
         // Pre-defined questions
         this.questions = [
             {
-                title: "What is Atrial Fibrillation?"
+                title: "Dialysis"
             },
             {
-                title: "What is Stroke?"
+                title: "Respiratory Therapy"
             },
             {
-                title: "What is HF Stage B?"
+                title: "Cardiac Rehabilitation"
             },
             {
-                title: "What is Hypertension?"
+                title: "Physical Medicine and Rehabilitation (PM&R)"
             },
             {
-                title: "What is what is Anaemia?"
+                title: "Immunotherapy"
             }
         ];
 
@@ -190,6 +190,7 @@ class Consultation extends HTMLDivElement {
     }
 
     async processMessageToChatGPT() {
+        
         let inputMsg = "";
         inputMsg = this.inputValue;
         
@@ -215,7 +216,7 @@ class Consultation extends HTMLDivElement {
 
         const apiRequestBody = {
             "model": "gpt-3.5-turbo",
-            "messages": [{role: "user", content: inputMsg}],
+            "messages": [{role: "user", content: "explain what is " + inputMsg }],
             stream: true
           }
 
@@ -353,6 +354,6 @@ class Consultation extends HTMLDivElement {
     }
 }
 
-customElements.define("consultation-component", Consultation, {
+customElements.define("explain-component", Explain, {
    extends: "div"
 })
