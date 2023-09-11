@@ -55,7 +55,10 @@ class MainMenuListItem extends HTMLLIElement {
                 this.hiddenModules();
                 document.getElementById("prognosis_explain_holder").classList.remove("hidden_module");
                 document.getElementById("menu_item_explain").classList.add("active");
-                
+            case "guideline":
+                this.hiddenModules();
+                document.getElementById("prognosis_guideline_holder").classList.remove("hidden_module");
+                document.getElementById("menu_item_guideline").classList.add("active");
                 break;
             
         }

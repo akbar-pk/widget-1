@@ -8,8 +8,59 @@ export const styles = `
         display: flex;
         gap: 5px;
     }
-    .hidden_module {
+    .hidden_module, .hide_page {
         display: none !important;
+    }
+    .prognosis_chat_home_wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 123456789;
+        background: #fff;
+    }
+    .prognosis_chat_home_wrapper .prognosis_chat_home_left {
+        width: 50%;
+        height: 100%;
+        broder-right: 1px solid red;
+    }
+    .prognosis_chat_inner_left {
+        padding: 25px;
+        padding-left: 50px;
+    }
+    .prognosis_chat_heading {
+        font-size: 20px;
+    }
+    .prognosis_chat_inner_left_header {
+        margin-top: 50px;
+    }
+    .prognosis_e_chat {
+        cursor: pointer;
+    }
+    .prognosis_chat_home_wrapper .prognosis_chat_home_right {
+        width: 50%;
+        height: 100%;
+        background: url("https://plus.unsplash.com/premium_photo-1664910180803-04e917ea041e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80") top center / cover no-repeat;
+    }
+    .prognosis_chat_home_left_content {
+        margin: 40px 0 0 0;
+        padding-left: 20px;
+    }
+    .prognosis_chat_question_item {
+        font-size: 14px;
+        font-weight: normal;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+    .prognosis_chat_home_left_list_holder .prognosis_chat_question_item {
+        margin-bottom: 15px;
+    }
+    .prognosis_chat_question_item:hover {
+        font-weight: bold;
     }
     .prognosis_pre_questions_wrapper {
         padding: 30px 15px 15px 15px;
@@ -24,6 +75,7 @@ export const styles = `
         width: 100%;
         max-width: 800px;
         margin: 0 auto;
+        display: none;
     }
     .prognosis_pre_qa_wrapper .prognosis_pre_question_block {
         min-width: 120px;
@@ -93,6 +145,8 @@ export const styles = `
         border-radius: 20px;
         padding: 10px;
         margin-bottom: 15px;
+        font-size: 14px;
+        line-height: 1.5;
     }
     .prognosis__chat_bubble_user {
         margin-bottom: 15px;
@@ -150,7 +204,7 @@ export const styles = `
     }
     .prognosis__display_area {
         width: 100%;
-        height: calc(100% - 180px);
+        height: calc(100% - 200px);
         padding: 70px 15px 15px 15px;
         box-sizing: border-box;
         overflow: auto;

@@ -1,4 +1,4 @@
-import { RECORDING_ICON, SEND_ICON, START_RECORD_ICON, STOP_RECORD_ICON } from "../../svgIcons.js";
+import { BLOOD_PRESSURE_ICON, BRAIN_ICON, FOOD_ICON, HEART_ICON, RECORDING_ICON, SEND_ICON, START_RECORD_ICON, STOP_RECORD_ICON } from "../../svgIcons.js";
 
 class Consultation extends HTMLDivElement {
     constructor() {
@@ -7,6 +7,12 @@ class Consultation extends HTMLDivElement {
         console.log("this.options", this.theme.primaryColor);
         this.currentOutput = "";
         this.inputValue = "";
+
+        this.mainChatLink = document.getElementById("prognosis_e_chat");
+        this.mainChatLink.classList.add("prognosis_e_chat");
+        this.mainChatLink.addEventListener("click", () => {
+            this.chatHomeWrapper.classList.remove("hide_page");
+        });
 
         // Chat loader 
         const loaderHolderStyle = `
@@ -58,6 +64,94 @@ class Consultation extends HTMLDivElement {
             }
         ];
 
+        // Chat home
+
+        this.chatHomeWrapper = document.createElement("div");
+        this.chatHomeWrapper.classList.add("prognosis_chat_home_wrapper");
+
+        this.chatHomeLeft  = document.createElement("div");
+        this.chatHomeLeft.classList.add("prognosis_chat_home_left");
+        this.chatHomeLeftInner = document.createElement("div");
+        this.chatHomeLeftInner.classList.add("prognosis_chat_inner_left"),
+        this.chatInnerHeader = document.createElement("div");
+        this.chatInnerHeader.classList.add("prognosis_chat_inner_left_header");
+        this.chatLeftHeading = document.createElement("h2");
+        this.chatLeftHeading.classList.add("prognosis_chat_heading");
+        const chatLeftHeadingText = document.createTextNode("What medical questions can I answer for you today?");
+        this.chatLeftHeading.appendChild(chatLeftHeadingText);
+        this.chatInnerHeader.appendChild(this.chatLeftHeading);
+        this.chatHomeLeftInner.appendChild(this.chatInnerHeader);
+        this.chatHomeLeft.appendChild(this.chatHomeLeftInner);
+
+        this.chatLeftContentBox = document.createElement("div");
+        this.chatLeftContentBox.classList.add("prognosis_chat_home_left_content");
+
+        this.chatLetListHolder = document.createElement("div");
+        this.chatLetListHolder.classList.add("prognosis_chat_home_left_list_holder");
+
+        const chatHomeQuestionsList = [
+            {
+               question:  "Why is my chest beating fast while resting?",
+               icon: "heart"
+            },
+            {
+                question:  "Is my blood pressure medication the right dosage?",
+                icon: "bloodPressure"
+            },
+            {
+                question:  "What is risk of stroke for a 35 year old?",
+                icon: "brain"
+            },
+            {
+                question:  "Does not drinking  milk make me anaemic?",
+                icon: "food"
+            }
+        ];
+
+        this.chatHomeLeftInner.appendChild(this.chatLeftContentBox);
+
+        this.generateChatHomeQuestion(chatHomeQuestionsList);
+
+        this.chatLeftContentBox.appendChild(this.chatLetListHolder);
+
+        // this.chatQuestionHeart = document.createElement("h4");
+        // this.chatQuestionHeart.classList.add("prognosis_chat_question_item");
+        // this.chatQuestionHeartIcon = document.createElement("span");
+        // this.chatQuestionHeartIcon.classList.add("prognosis_chat_question_icon");
+        // this.chatQuestionHeart.setAttribute("data-question", "Why is my chest beating fast while resting?")
+        // this.chatQuestionHeartIcon.innerHTML = HEART_ICON;
+        // this.chatQuestionHeart.appendChild(this.chatQuestionHeartIcon);
+        // const heartQuestionOne = document.createTextNode("Why is my chest beating fast while resting?");
+        // this.chatQuestionHeart.addEventListener("click", () => {
+        //     this.chatHomeWrapper.classList.add("hide_page");
+        //     this.inputValue = "why is my chest beating fast while resting";
+        //     this.processMessageToChatGPT();
+        // });
+        // this.chatQuestionHeart.appendChild(heartQuestionOne);
+        // this.chatLetListHolder.appendChild(this.chatQuestionHeart);
+
+        
+
+        // this.chatHomeLeftInner.appendChild(this.chatLeftContentBox);
+
+        // why is my chest beating fast while resting?
+        
+
+        this.chatHomeRight  = document.createElement("div");
+        this.chatHomeRight.classList.add("prognosis_chat_home_right");
+
+        this.chatHomeWrapper.appendChild(this.chatHomeLeft);
+        this.chatHomeWrapper.appendChild(this.chatHomeRight);
+
+        const rootWrapper = document.querySelector(".prognosis__wrapper");
+        console.log("rootWrapper", rootWrapper);
+        if(rootWrapper) {
+            rootWrapper.appendChild(this.chatHomeWrapper);
+        }
+        
+
+        // Chat home END
+
         this.questionsWrapper = document.createElement("div");
         this.generateQuestion(this.questions);
         this.questionsWrapper.classList.add("prognosis_pre_qa_wrapper");
@@ -69,6 +163,7 @@ class Consultation extends HTMLDivElement {
         this.displayArea = document.createElement("div");
         this.displayArea.classList.add("prognosis__consult_display_area");
         this.displayArea.classList.add("prognosis__display_area");
+        // this.displayArea.appendChild(this.chatHomeWrapper);
         this.displayArea.appendChild(this.questionsWrapper);
 
         this.chatBubble = document.createElement("div");
@@ -77,7 +172,9 @@ class Consultation extends HTMLDivElement {
         this.userChatBubble = document.createElement("div");
         this.userChatBubble.classList.add("prognosis__chat_bubble_user");
         this.userChatBubbleInner = document.createElement("div");
-        this.userChatBubbleInner.classList.add("prognosis__chat_bubble_user_inner")
+        this.userChatBubbleInner.classList.add("prognosis__chat_bubble_user_inner");
+        this.userChatBubbleInner.style.backgroundColor = this.theme.primaryColor;
+        this.userChatBubbleInner.style.color = "#fff";
 
         // Text Input
 
@@ -167,8 +264,8 @@ class Consultation extends HTMLDivElement {
         this.recordDescription.classList.add("prognosis_record_desc_text");
         this.recordDescription.innerText = "Press the mic button to ask a question";
 
-        this.recordingWrapper.appendChild(this.startRecordBtn);
-        this.recordingWrapper.appendChild(this.recordDescription);
+        // this.recordingWrapper.appendChild(this.startRecordBtn);
+        // this.recordingWrapper.appendChild(this.recordDescription);
 
         // Rcording END
 
@@ -190,6 +287,8 @@ class Consultation extends HTMLDivElement {
     }
 
     async processMessageToChatGPT() {
+        // alert(this.inputValue);
+        // return;
         let inputMsg = "";
         inputMsg = this.inputValue;
         
@@ -345,6 +444,71 @@ class Consultation extends HTMLDivElement {
             this.questionsWrapper.appendChild(questionBlock);
         });
     }
+
+    generateChatHomeQuestion(data) {
+        
+        data.forEach(element => {
+
+        // this.chatQuestionHeart = document.createElement("h4");
+        // this.chatQuestionHeart.classList.add("prognosis_chat_question_item");
+        // this.chatQuestionHeartIcon = document.createElement("span");
+        // this.chatQuestionHeartIcon.classList.add("prognosis_chat_question_icon");
+        // this.chatQuestionHeart.setAttribute("data-question", "Why is my chest beating fast while resting?")
+        // this.chatQuestionHeartIcon.innerHTML = HEART_ICON;
+        // this.chatQuestionHeart.appendChild(this.chatQuestionHeartIcon);
+        // const heartQuestionOne = document.createTextNode("Why is my chest beating fast while resting?");
+        // this.chatQuestionHeart.addEventListener("click", () => {
+        //     this.chatHomeWrapper.classList.add("hide_page");
+        //     this.inputValue = "why is my chest beating fast while resting";
+        //     this.processMessageToChatGPT();
+        // });
+        // this.chatQuestionHeart.appendChild(heartQuestionOne);
+        // this.chatLetListHolder.appendChild(this.chatQuestionHeart);
+
+            
+
+            const questionBlock = document.createElement("h4");
+            questionBlock.classList.add("prognosis_chat_question_item");
+            questionBlock.setAttribute("id", element.question);
+
+            const chatQuestionIcon = document.createElement("span");
+            chatQuestionIcon.classList.add("prognosis_chat_question_icon");
+            // chatQuestionIcon.innerHTML = HEART_ICON;
+            switch (element.icon) {
+                case "heart":
+                    chatQuestionIcon.innerHTML = HEART_ICON;
+                    break;
+                case "bloodPressure":
+                    chatQuestionIcon.innerHTML = BLOOD_PRESSURE_ICON;
+                    break;
+                case "brain":
+                    chatQuestionIcon.innerHTML = BRAIN_ICON;
+                    break;
+                case "food":
+                    chatQuestionIcon.innerHTML = FOOD_ICON;
+                    break;
+            }
+            questionBlock.appendChild(chatQuestionIcon);
+            const chatTextHolder = document.createElement("span");
+            chatTextHolder.classList.add("prognosis_question_text_holder");
+            chatTextHolder.innerText = element.question;
+            questionBlock.appendChild(chatTextHolder);
+
+            questionBlock.addEventListener("click", (event) => {
+                this.chatHomeWrapper.classList.add("hide_page");
+                this.inputValue = event.currentTarget.id;
+                
+                this.processMessageToChatGPT();
+                this.questionsWrapper.classList.add("hide_section");
+            });
+            
+            this.chatLetListHolder.appendChild(questionBlock);
+        });
+        // this.chatLeftContentBox.appendChild(this.chatLetListHolder);
+    }
+
+    
+    
 
     askQuestion(event) {
         console.log("question", event.currentTarget.id);

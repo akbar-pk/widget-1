@@ -7,6 +7,7 @@ import "./Components/ChatModules/Consultation.js";
 import "./Components/ChatModules/PreDefinedQuestions.js";
 import "./Components/ChatModules/MedicalCoding.js";
 import "./Components/ChatModules/Explain.js";
+import "./Components/ChatModules/Guidelines.js";
 
 class MessageWidget {
   constructor(options) { 
@@ -178,7 +179,7 @@ class MessageWidget {
             <a href="https://myprognosis.ai/">${PROGNOSIS_LOGO}</a>
             <ul class="prognosis-sidebar-menu-list">
               <li>
-                <div class="prognosis-menu-title">${CHT_ICON} <span>Chat</span></div>
+                <div class="prognosis-menu-title" id="prognosis_e_chat">${CHT_ICON} <span>Chat</span></div>
                 <ul class="prognosis-menu-children">
                   <li class="prognosis_main_nav_item" is="menu-list-item" data-id="newChat" id="menu_item_new_chat">New Chat</li>
                 </ul>
@@ -188,7 +189,8 @@ class MessageWidget {
                 <ul class="prognosis-menu-children">
                   <li class="prognosis_main_nav_item" is="menu-list-item" data-id="medicalCoding" id="menu_item_medical_coding">Medical Coding</li>
                   <li class="prognosis_main_nav_item" is="menu-list-item" data-id="explain" id="menu_item_explain">Explain</li>
-                  </ul>
+                  <li class="prognosis_main_nav_item" is="menu-list-item" data-id="guideline" id="menu_item_guideline">Medical Guidelines</li>
+                </ul>
               </li>
             </ul>
           </div>
@@ -197,7 +199,8 @@ class MessageWidget {
           <div class="prognosis_main_module hidden_module prognosis__medical_coding_holder" id="prognosis_medical_coding_holder" is="medical-coding"></div>
           <div class="prognosis_main_module hidden_module prognosis__conslutation_holder" id="prognosis_consultation_holder" is="consultation-component" data-id="consultaton_comp_wrap"></div>
           <div class="prognosis_main_module hidden_module prognosis__explain_holder" id="prognosis_explain_holder" is="explain-component"></div>
-          </div>
+          <div class="prognosis_main_module hidden_module prognosis__guideline_holder" id="prognosis_guideline_holder" is="guideline-component"></div>
+        </div>
     </div>
     `;
 
@@ -243,5 +246,8 @@ function initializeWidget(position) {
   return new MessageWidget(position);
   
 }
+
+
+
 
 window.IntPrognosisWidget = initializeWidget;
