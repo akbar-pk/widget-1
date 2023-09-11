@@ -247,19 +247,6 @@ function initializeWidget(position) {
   
 }
 
-const options = {
-  prognosisOAKey : "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",
-  from: "website",
-  theme: {
-    primaryColor: "green",
-    secondaryColor: "#F5F6F7",
-    btnTextColor: "#ffffff",
-    position: "bottom-right"
-  }
-  
-};
-
-initializeWidget(options);
 
 
 window.IntPrognosisWidget = initializeWidget;
