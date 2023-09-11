@@ -1,4 +1,4 @@
-import { BLOOD_PRESSURE_ICON, BRAIN_ICON, FOOD_ICON, HEART_ICON, RECORDING_ICON, SEND_ICON, START_RECORD_ICON, STOP_RECORD_ICON } from "../../svgIcons.js";
+import { BLOOD_PRESSURE_ICON, BRAIN_ICON, FOOD_ICON, HEART_ICON, PROGNOSIS_LOGO, RECORDING_ICON, SEND_ICON, START_RECORD_ICON, STOP_RECORD_ICON } from "../../svgIcons.js";
 
 class Consultation extends HTMLDivElement {
     constructor() {
@@ -71,8 +71,13 @@ class Consultation extends HTMLDivElement {
 
         this.chatHomeLeft  = document.createElement("div");
         this.chatHomeLeft.classList.add("prognosis_chat_home_left");
+        this.chatHomeLogoHolder = document.createElement("div");
+        this.chatHomeLogoHolder.classList.add("prognosis_chat_home_logo_holder");
+        this.chatHomeLogoHolder.innerHTML = PROGNOSIS_LOGO;
+        
         this.chatHomeLeftInner = document.createElement("div");
-        this.chatHomeLeftInner.classList.add("prognosis_chat_inner_left"),
+        this.chatHomeLeftInner.classList.add("prognosis_chat_inner_left");
+        this.chatHomeLeftInner.appendChild(this.chatHomeLogoHolder);
         this.chatInnerHeader = document.createElement("div");
         this.chatInnerHeader.classList.add("prognosis_chat_inner_left_header");
         this.chatLeftHeading = document.createElement("h2");

@@ -26,6 +26,12 @@ export const styles = `
         height: 100%;
         broder-right: 1px solid red;
     }
+    .prognosis_chat_home_logo_holder {
+        margin-top: 20px;
+    }
+    .prognosis_chat_home_logo_holder svg {
+        zoom: 150%;
+    }
     .prognosis_chat_inner_left {
         padding: 25px;
         padding-left: 50px;
