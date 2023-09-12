@@ -43,6 +43,10 @@ var W=Object.defineProperty;var H=(l,t,e)=>t in l?W(l,t,{enumerable:!0,configura
         display: flex;
         justify-content: center;
         align-items: center;
+        background: #efefef !important;
+    }
+    .prognosis_menu_collapse_btn:hover {
+        background: lightgray !important;
     }
     .prognosis_menu_collapse_btn .collapse_arrow_right,
     .prognosis_menu_collapse_btn .collapse_arrow_left {
