@@ -67,6 +67,14 @@ export const SUGERY_ICON = `
     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M496-346 346-496l332-332q12-12 28.5-12t28.5 12l93 93q12 12 12 28.5T828-678L496-346Zm0-114 248-247-37-37-247 248 36 36Zm-56 340 80-80h360v80H440Zm-237 0q-46 0-88.5-18T40-188l265-264 104 104q14 14 22 32t8 38q0 20-8 38.5T409-207l-19 19q-32 32-74.5 50T227-120h-24Zm0-80h24q30 0 58-11.5t49-32.5l19-19q6-6 6-14t-6-14l-48-48-136 135q8 2 17 3t17 1Zm541-507-37-37 37 37ZM305-339Z"/></svg>
 `;
 
+export const RIGHT_ARROW = `
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+`;
+
+export const LEFT_ARROW = `
+    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg>
+`;
+
 export const SEND_ICON = `
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +100,7 @@ export const RECORDING_ICON = `
 
 export const STOP_RECORD_ICON = `
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path fill="#ffffff" fillRule="evenodd" clipRule="evenodd" d="M13 2.5H5C3.61929 2.5 2.5 3.61929 2.5 5V13C2.5 14.3807 3.61929 15.5 5 15.5H13C14.3807 15.5 15.5 14.3807 15.5 13V5C15.5 3.61929 14.3807 2.5 13 2.5ZM5 0C2.23858 0 0 2.23858 0 5V13C0 15.7614 2.23858 18 5 18H13C15.7614 18 18 15.7614 18 13V5C18 2.23858 15.7614 0 13 0H5Z"/>
+            <path fill="#000000" fillRule="evenodd" clipRule="evenodd" d="M13 2.5H5C3.61929 2.5 2.5 3.61929 2.5 5V13C2.5 14.3807 3.61929 15.5 5 15.5H13C14.3807 15.5 15.5 14.3807 15.5 13V5C15.5 3.61929 14.3807 2.5 13 2.5ZM5 0C2.23858 0 0 2.23858 0 5V13C0 15.7614 2.23858 18 5 18H13C15.7614 18 18 15.7614 18 13V5C18 2.23858 15.7614 0 13 0H5Z"/>
         </svg>`;
 
 export const START_RECORD_ICON = `

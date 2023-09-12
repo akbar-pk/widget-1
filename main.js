@@ -1,6 +1,6 @@
 // import * as Redux from "/store/Redux.js"
 import { styles } from "./styles.js";
-import { PROGNOSIS_AI_LOGO, CLOSE_ICON, MESSAGE_ICON, CHT_ICON, PROGNOSIS_LOGO, SMART_TASK_ICON } from "./svgIcons.js";
+import { PROGNOSIS_AI_LOGO, CLOSE_ICON, MESSAGE_ICON, CHT_ICON, PROGNOSIS_LOGO, SMART_TASK_ICON, RIGHT_ARROW, LEFT_ARROW } from "./svgIcons.js";
 // import "./Components/ExpandableList.js";
 import "./Components/MainMenuListItem.js";
 import "./Components/ChatModules/Consultation.js";
@@ -27,6 +27,11 @@ class MessageWidget {
     this.open = false;
     this.initialize();
     this.injectStyles();
+    this.mainWrapper = document.querySelector(".prognosis__wrapper");
+    this.sideMenuWrapper = document.querySelector("#prognosis_side_bar_wrapper");
+    this.sideMenuToggleBtn = document.querySelector("#prognosis_menu_collapse_btn");
+    this.sideMenuToggleBtn.addEventListener("click", this.toggleSideMenu.bind(this));
+    
    }
 
   position = "";
@@ -41,6 +46,27 @@ class MessageWidget {
       [vertical]: "30px",
       [horizontal]: "30px",
     };
+  }
+
+  toggleSideMenu(e) {
+    console.log("e", e);
+    console.log("e target", e.currentTarget);
+    const elemnt = e.currentTarget;
+    if(elemnt.classList.contains("collapsed")) {
+      this.mainWrapper.classList.remove("collapsed");
+      this.mainWrapper.classList.add("expanded");
+      this.sideMenuWrapper.classList.remove("collapsed");
+      this.sideMenuWrapper.classList.add("expanded");
+      elemnt.classList.remove("collapsed");
+      elemnt.classList.add("expanded");
+    } else {
+      this.mainWrapper.classList.remove("expanded");
+      this.mainWrapper.classList.add("collapsed");
+      this.sideMenuWrapper.classList.remove("expanded");
+      this.sideMenuWrapper.classList.add("collapsed");
+      elemnt.classList.remove("expanded");
+      elemnt.classList.add("collapsed");
+    }
   }
 
   async initialize() {
@@ -173,25 +199,31 @@ class MessageWidget {
   createWidgetContent() {
     // <li is="menu-list-item" data-id="existingChat">Existing Chat</li>
     this.widgetContainer.innerHTML = `
-    <div class="prognosis__wrapper">
-      <div class="prognosis-sidebar-menu-wrapper" style="background-color: ${this.theme.secondaryColor}">
-        <div class="aside-wrap">
+    <div class="prognosis__wrapper collapsed">
+      <div id="prognosis_side_bar_wrapper" class="prognosis-sidebar-menu-wrapper collapsed" style="background-color: ${this.theme.secondaryColor}">
+        <div class="aside-wrap" id="prognosis_main_nav_wrapper">
             <a href="https://myprognosis.ai/">${PROGNOSIS_LOGO}</a>
+            <div class="prognosis_menu_collapse_btn_holder">
+              <button class="prognosis_menu_collapse_btn collapsed" id="prognosis_menu_collapse_btn">
+                <span class="collapse_arrow_left">${LEFT_ARROW}</span>
+                <span class="collapse_arrow_right">${RIGHT_ARROW}</span>
+              </button>
+            </div>
             <ul class="prognosis-sidebar-menu-list">
               <li>
-                <div class="prognosis-menu-title" id="prognosis_e_chat">${CHT_ICON} <span>Chat</span></div>
-                <ul class="prognosis-menu-children">
-                  <li class="prognosis_main_nav_item" is="menu-list-item" data-id="newChat" id="menu_item_new_chat">New Chat</li>
-                </ul>
+                <div class="prognosis-menu-title active" id="prognosis_e_chat">${CHT_ICON} <span class="prognosis-menu-text">Chat</span></div>
+                <!--<ul class="prognosis-menu-children">
+                  <li class="prognosis_main_nav_item" is="menu-list-item" data-id="newChat" id="menu_item_new_chat"><span class="prognosis-menu-text">New Chat</span></li>
+                </ul>-->
               </li>
-              <li>
-                <div class="prognosis-menu-title">${SMART_TASK_ICON} <span>Smart Tasks</span></div>
+              <!--<li>
+                <div class="prognosis-menu-title">${SMART_TASK_ICON} <span class="prognosis-menu-text">Smart Tasks</span></div>
                 <ul class="prognosis-menu-children">
-                  <li class="prognosis_main_nav_item" is="menu-list-item" data-id="medicalCoding" id="menu_item_medical_coding">Medical Coding</li>
-                  <li class="prognosis_main_nav_item" is="menu-list-item" data-id="explain" id="menu_item_explain">Explain</li>
-                  <li class="prognosis_main_nav_item" is="menu-list-item" data-id="guideline" id="menu_item_guideline">Medical Guidelines</li>
+                  <li class="prognosis_main_nav_item" is="menu-list-item" data-id="medicalCoding" id="menu_item_medical_coding"><span class="prognosis-menu-text">Medical Coding</span></li>
+                  <li class="prognosis_main_nav_item" is="menu-list-item" data-id="explain" id="menu_item_explain"><span class="prognosis-menu-text">Explain</span></li>
+                  <li class="prognosis_main_nav_item" is="menu-list-item" data-id="guideline" id="menu_item_guideline"><span class="prognosis-menu-text">Medical Guidelines</span></li>
                 </ul>
-              </li>
+              </li>-->
             </ul>
           </div>
         </div>
@@ -246,7 +278,6 @@ function initializeWidget(position) {
   return new MessageWidget(position);
   
 }
-
 
 
 window.IntPrognosisWidget = initializeWidget;

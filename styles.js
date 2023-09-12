@@ -1,15 +1,60 @@
 export const styles = `
     .widget__container * {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+        font-weight: normal;
         box-sizing: border-box;
         padding: 0;
         margin: 0;
     } 
+    button, button:focus-visible, button:focus, button:focus-within, button:active {
+        border: none;
+        outline: none;
+    }
     .prognosis_logo_in_ai {
         display: flex;
         gap: 5px;
+        zoom: 1.3;
     }
     .hidden_module, .hide_page {
         display: none !important;
+    }
+    .prognosis_menu_collapse_btn_holder {
+        display: flex;
+        justify-content: end;
+        margin-right: -25px;
+        position: absolute;
+        z-index: 3;
+        width: 66px;
+    }
+    .prognosis-sidebar-menu-wrapper.collapsed .prognosis_menu_collapse_btn_holder {
+        width: 55px;
+    }
+    .prognosis-sidebar-menu-wrapper.expanded .prognosis_menu_collapse_btn_holder {
+        width: 246px;
+    }
+    .prognosis_menu_collapse_btn {
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        border-radius: 100px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .prognosis_menu_collapse_btn .collapse_arrow_right,
+    .prognosis_menu_collapse_btn .collapse_arrow_left {
+        display: block;
+        width: 22px;
+        height: 22px;
+    }
+    .prognosis_menu_collapse_btn.expanded .collapse_arrow_right {
+        display: none;
+    }
+    .prognosis_menu_collapse_btn.collapsed .collapse_arrow_left {
+        display: none;
     }
     .prognosis_chat_home_wrapper {
         display: flex;
@@ -18,13 +63,12 @@ export const styles = `
         width: 100%;
         height: 100%;
         position: fixed;
-        z-index: 123456789;
+        z-index: 1;
         background: #fff;
     }
     .prognosis_chat_home_wrapper .prognosis_chat_home_left {
-        width: 50%;
+        width: 60%;
         height: 100%;
-        broder-right: 1px solid red;
     }
     .prognosis_chat_home_logo_holder {
         margin-top: 20px;
@@ -33,22 +77,25 @@ export const styles = `
         zoom: 150%;
     }
     .prognosis_chat_inner_left {
-        padding: 25px;
-        padding-left: 50px;
+        padding: 0;
+        height: 100%;
+        position: relative;
     }
     .prognosis_chat_heading {
         font-size: 20px;
+        font-weight: bold;
     }
     .prognosis_chat_inner_left_header {
         margin-top: 50px;
+        padding: 0 30px;
     }
     .prognosis_e_chat {
         cursor: pointer;
     }
     .prognosis_chat_home_wrapper .prognosis_chat_home_right {
-        width: 50%;
+        width: 40%;
         height: 100%;
-        background: url("https://plus.unsplash.com/premium_photo-1664910180803-04e917ea041e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80") top center / cover no-repeat;
+        background: url("https://images.unsplash.com/photo-1530497610245-94d3c16cda28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80") top center / cover no-repeat;
     }
     .prognosis_chat_home_left_content {
         margin: 40px 0 0 0;
@@ -62,8 +109,17 @@ export const styles = `
         align-items: center;
         gap: 7px;
     }
+    .prognosis_chat_home_left_list_holder {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
     .prognosis_chat_home_left_list_holder .prognosis_chat_question_item {
         margin-bottom: 15px;
+        border: 1px solid #dcdbdb;
+        padding: 10px 15px 10px 15px;
+        border-radius: 40px;
     }
     .prognosis_chat_question_item:hover {
         font-weight: bold;
@@ -103,6 +159,7 @@ export const styles = `
         padding: 5px;
         border: unset;
         cursor: pointer;
+        border: unset !important;
     }
 
     .prognosis_chat_stop_btn {
@@ -114,6 +171,7 @@ export const styles = `
         display: flex;
         justify-content: center;
         align-items: center;
+        background: unset;
     }
 
     .prognosis_recording_wrapper {
@@ -162,7 +220,7 @@ export const styles = `
     }
     .prognosis__chat_bubble_user_inner {
         max-width: 90%;
-        border: 1px solid green;
+        border: 1px solid lightgray;
         border-radius: 20px;
         padding: 10px;
     }
@@ -175,6 +233,7 @@ export const styles = `
         display: flex;
         justify-content: center;
         align-items: center;
+        background: unset;
     }
     .prognosis__consult_wrap {
         display: flex;
@@ -183,23 +242,43 @@ export const styles = `
         align-items: center;
     }
     .prognosis_text_input_wrapper {
+        width: 100%;
+        position: absolute;
+        bottom: 50px;
+        background-color: #fff;
+        padding: 5px 0;
         display: flex;
-        align-items: center;
-        gap: 10px;
-        width: 90%;
-        max-width: 546px;
+        justify-content: center;
     }
-    .prognosis__consult_inputbox {
+    .prognosis_text_input_container {
         border-radius: 30px;
         border: 1px solid #ccc;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        padding: 0 15px;
+        width: 100%;
+        max-width: 70%;
+        margin: 0;
+        overflow: hidden;
+    }
+    .shadow-edge {
+        box-shadow: 0px 0px 3px black;
+        height: 1px;
+        margin-bottom: -2px;
+        display: none;
+    }
+    .prognosis__consult_inputbox {
+        border: unset;
         padding: 15px;
         height: 50px;
-        width: 84%;
+        width: 91%;
         overflow: hidden;
-        max-width: 546px;
+        outline: unset;
+        resize: none;
     }
     .prognosis__consult_inputbox:focus-visible {
-        border: 1px solid gray !important;
+        border: unset;
     }
     .prognosis__consult_submitBtn svg {
         width: 20px;
@@ -211,7 +290,7 @@ export const styles = `
     .prognosis__display_area {
         width: 100%;
         height: calc(100% - 200px);
-        padding: 70px 15px 15px 15px;
+        padding: 70px 30px 15px 30px;
         box-sizing: border-box;
         overflow: auto;
     }
@@ -219,7 +298,6 @@ export const styles = `
         display: flex;
         height: 100%;
         width: 100%;
-        gap: 15px;
     }
     .prognosis__main-wrap {
         flex: 1;
@@ -228,21 +306,36 @@ export const styles = `
     
     .prognosis-sidebar-menu-wrapper {
         padding: 25px 15px 15px 25px;
-        width: 256px;
         height: 100%;
+    }
+    .prognosis-sidebar-menu-wrapper.expanded {
+        width: 256px;
+    }
+    .prognosis-sidebar-menu-wrapper.collapsed {
+        width: 66px;
+        overflow: hidden;
     }
     .prognosis-sidebar-menu-list {
         list-style: none;
         color: #000;
-        margin: 74px 0 0 0;
+        margin: 50px 0 0 0;
     }
     .prognosis-sidebar-menu-list > li {
         margin-bottom: 25px;
+        position: relative;
     }
     .prognosis-sidebar-menu-list .prognosis-menu-title {
         display: flex;
         align-items: center;
         font-size: 16px;
+    }
+    .prognosis-sidebar-menu-list .prognosis-menu-title.active::after {
+        position: absolute;
+        content: "";
+        border-right: 3px solid black;
+        width: 2px;
+        height: 20px;
+        right: -10px;
     }
     .prognosis-sidebar-menu-list .prognosis-menu-title span {
         display: block;
@@ -268,6 +361,14 @@ export const styles = `
     }
     .prognosis-sidebar-menu-list ul li {
         color: #4C535D;
+    }
+    .prognosis-sidebar-menu-wrapper.collapsed .logo-header-main,
+    .prognosis-sidebar-menu-wrapper.collapsed .prognosis-menu-text {
+        display: none;
+    }
+    .prognosis-sidebar-menu-wrapper.expanded .logo-header-main,
+    .prognosis-sidebar-menu-wrapper.expanded .prognosis-menu-text {
+        display: block;
     }
     .prognosis_main_module {
         height: 100%;

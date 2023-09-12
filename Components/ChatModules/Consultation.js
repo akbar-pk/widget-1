@@ -77,7 +77,7 @@ class Consultation extends HTMLDivElement {
         
         this.chatHomeLeftInner = document.createElement("div");
         this.chatHomeLeftInner.classList.add("prognosis_chat_inner_left");
-        this.chatHomeLeftInner.appendChild(this.chatHomeLogoHolder);
+        // this.chatHomeLeftInner.appendChild(this.chatHomeLogoHolder);
         this.chatInnerHeader = document.createElement("div");
         this.chatInnerHeader.classList.add("prognosis_chat_inner_left_header");
         this.chatLeftHeading = document.createElement("h2");
@@ -119,37 +119,13 @@ class Consultation extends HTMLDivElement {
 
         this.chatLeftContentBox.appendChild(this.chatLetListHolder);
 
-        // this.chatQuestionHeart = document.createElement("h4");
-        // this.chatQuestionHeart.classList.add("prognosis_chat_question_item");
-        // this.chatQuestionHeartIcon = document.createElement("span");
-        // this.chatQuestionHeartIcon.classList.add("prognosis_chat_question_icon");
-        // this.chatQuestionHeart.setAttribute("data-question", "Why is my chest beating fast while resting?")
-        // this.chatQuestionHeartIcon.innerHTML = HEART_ICON;
-        // this.chatQuestionHeart.appendChild(this.chatQuestionHeartIcon);
-        // const heartQuestionOne = document.createTextNode("Why is my chest beating fast while resting?");
-        // this.chatQuestionHeart.addEventListener("click", () => {
-        //     this.chatHomeWrapper.classList.add("hide_page");
-        //     this.inputValue = "why is my chest beating fast while resting";
-        //     this.processMessageToChatGPT();
-        // });
-        // this.chatQuestionHeart.appendChild(heartQuestionOne);
-        // this.chatLetListHolder.appendChild(this.chatQuestionHeart);
-
-        
-
-        // this.chatHomeLeftInner.appendChild(this.chatLeftContentBox);
-
-        // why is my chest beating fast while resting?
-        
-
         this.chatHomeRight  = document.createElement("div");
         this.chatHomeRight.classList.add("prognosis_chat_home_right");
 
         this.chatHomeWrapper.appendChild(this.chatHomeLeft);
         this.chatHomeWrapper.appendChild(this.chatHomeRight);
 
-        const rootWrapper = document.querySelector(".prognosis__wrapper");
-        console.log("rootWrapper", rootWrapper);
+        const rootWrapper = document.querySelector(".prognosis__conslutation_holder");
         if(rootWrapper) {
             rootWrapper.appendChild(this.chatHomeWrapper);
         }
@@ -168,6 +144,7 @@ class Consultation extends HTMLDivElement {
         this.displayArea = document.createElement("div");
         this.displayArea.classList.add("prognosis__consult_display_area");
         this.displayArea.classList.add("prognosis__display_area");
+        this.displayArea.classList.add("hide_section");
         // this.displayArea.appendChild(this.chatHomeWrapper);
         this.displayArea.appendChild(this.questionsWrapper);
 
@@ -178,8 +155,6 @@ class Consultation extends HTMLDivElement {
         this.userChatBubble.classList.add("prognosis__chat_bubble_user");
         this.userChatBubbleInner = document.createElement("div");
         this.userChatBubbleInner.classList.add("prognosis__chat_bubble_user_inner");
-        this.userChatBubbleInner.style.backgroundColor = this.theme.primaryColor;
-        this.userChatBubbleInner.style.color = "#fff";
 
         // Text Input
 
@@ -207,7 +182,6 @@ class Consultation extends HTMLDivElement {
         this.submitBtn = document.createElement("button");
         this.submitBtn.classList.add("prognosis__consult_submitBtn");
         this.submitBtn.innerHTML = SEND_ICON;
-        this.submitBtn.setAttribute("style", buttonStyle);
         this.submitBtn.addEventListener("click", () => {
             this.processMessageToChatGPT()
         });
@@ -215,7 +189,6 @@ class Consultation extends HTMLDivElement {
         this.chatStopBtn = document.createElement("button");
         this.chatStopBtn.classList.add("prognosis_chat_stop_btn");
         this.chatStopBtn.innerHTML = STOP_RECORD_ICON;
-        this.chatStopBtn.setAttribute("style", buttonStyle);
         this.chatStopBtn.title = "Stop";
         this.chatStopBtn.style.display = "none";
         this.chatStopBtn.addEventListener("click", () => {
@@ -248,10 +221,14 @@ class Consultation extends HTMLDivElement {
 
         this.textInputWrapper = document.createElement("div");
         this.textInputWrapper.classList.add("prognosis_text_input_wrapper");
-        this.textInputWrapper.appendChild(this.inputBox);
-        this.textInputWrapper.appendChild(this.submitBtn);
-        this.textInputWrapper.appendChild(this.chatStopBtn);
-        this.textInputWrapper.appendChild(this.clearChatBtn);
+        this.textInputContainer = document.createElement("div");
+        this.textInputContainer.classList.add("prognosis_text_input_container");
+        this.textInputContainer.appendChild(this.inputBox);
+        this.textInputContainer.appendChild(this.submitBtn);
+        this.textInputContainer.appendChild(this.chatStopBtn);
+        this.textInputContainer.appendChild(this.clearChatBtn);
+        this.textInputWrapper.appendChild(this.textInputContainer);
+        
         //Text Input END
 
         
@@ -277,9 +254,11 @@ class Consultation extends HTMLDivElement {
         this.inputWrapper = document.createElement("div");
         this.inputWrapper.classList.add("prognosis__consult_wrap");
         this.inputWrapper.appendChild(this.recordingWrapper);
-        this.inputWrapper.appendChild(this.textInputWrapper);
+        // this.inputWrapper.appendChild(this.textInputWrapper);
+        this.chatHomeLeftInner.appendChild(this.displayArea);
+        this.chatHomeLeftInner.appendChild(this.textInputWrapper);
         
-        this.appendChild(this.displayArea);
+        // this.appendChild(this.displayArea);
         this.appendChild(this.inputWrapper);
 
         this.API_KEY = localStorage.getItem("prognosisOAKey");
@@ -292,8 +271,8 @@ class Consultation extends HTMLDivElement {
     }
 
     async processMessageToChatGPT() {
-        // alert(this.inputValue);
-        // return;
+        this.chatLeftContentBox.classList.add("hide_section");
+        this.displayArea.classList.remove("hide_section");
         let inputMsg = "";
         inputMsg = this.inputValue;
         
