@@ -233,7 +233,13 @@ var W=Object.defineProperty;var H=(l,t,e)=>t in l?W(l,t,{enumerable:!0,configura
         display: flex;
         justify-content: center;
         align-items: center;
-        background: unset;
+        background: unset !important;
+    }
+    .prognosis__consult_submitBtn:hover {
+        background: lightgray !important;
+    }
+    .prognosis__consult_submitBtn svg {
+        strock: black !important;
     }
     .prognosis__consult_wrap {
         display: flex;
