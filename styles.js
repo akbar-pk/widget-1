@@ -243,7 +243,7 @@ export const styles = `
         background: lightgray !important;
     }
     .prognosis__consult_submitBtn svg {
-        strock: black !important;
+        stroke: black !important;
     }
     .prognosis__consult_wrap {
         display: flex;
@@ -292,7 +292,7 @@ export const styles = `
     }
     .prognosis__consult_submitBtn svg {
         width: 20px;
-        hegiht: 20px;
+        height: 20px;
     }
     .prognosis__conslutation_holder {
         height: 100%;
