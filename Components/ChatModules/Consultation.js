@@ -1,4 +1,4 @@
-import { BLOOD_PRESSURE_ICON, BRAIN_ICON, FOOD_ICON, HEART_ICON, PROGNOSIS_LOGO, RECORDING_ICON, SEND_ICON, START_RECORD_ICON, STOP_RECORD_ICON } from "../../svgIcons.js";
+import { BLOOD_PRESSURE_ICON, BRAIN_ICON, FOOD_ICON, HEART_ICON, LOGO_FIRST_PART, PROGNOSIS_LOGO, RECORDING_ICON, SEND_ICON, START_RECORD_ICON, STOP_RECORD_ICON, USER_ICON } from "../../svgIcons.js";
 
 class Consultation extends HTMLDivElement {
     constructor() {
@@ -12,6 +12,12 @@ class Consultation extends HTMLDivElement {
         this.mainChatLink.classList.add("prognosis_e_chat");
         this.mainChatLink.addEventListener("click", () => {
             this.chatHomeWrapper.classList.remove("hide_page");
+        });
+
+        this.newChatBtn = document.querySelector(".prognosis_e_chat");
+        this.newChatBtn.addEventListener("click", () => {
+            this.chatLeftContentBox.classList.remove("hide_section");
+            this.displayArea.classList.add("hide_section");
         });
 
         // Chat loader 
@@ -150,11 +156,22 @@ class Consultation extends HTMLDivElement {
 
         this.chatBubble = document.createElement("div");
         this.chatBubble.classList.add("prognosis__chat_bubble_out");
+        this.chatBubbleInner = document.createElement("div");
+        this.chatBubbleInner.classList.add("prognosis__chat_bubble_out_inner");
+        this.progIconHolder = document.createElement("button");
+        this.progIconHolder.classList.add("prognosis_static_button");
+        this.progIconHolder.innerHTML = LOGO_FIRST_PART;
+        // this.chatBubble.appendChild(this.progIconHolder);
+        // this.chatBubble.appendChild(this.chatBubbleInner);
 
         this.userChatBubble = document.createElement("div");
         this.userChatBubble.classList.add("prognosis__chat_bubble_user");
         this.userChatBubbleInner = document.createElement("div");
         this.userChatBubbleInner.classList.add("prognosis__chat_bubble_user_inner");
+        this.userIconHolder = document.createElement("button");
+        this.userIconHolder.classList.add("prognosis_static_button");
+        this.userIconHolder.innerHTML = USER_ICON;
+        this.userChatBubble.appendChild(this.userIconHolder);
 
         // Text Input
 
@@ -283,6 +300,9 @@ class Consultation extends HTMLDivElement {
             this.submitBtn.style.display = "none";
 
             let clonedBubble = this.chatBubble.cloneNode(true);
+            let clonedBubbleInner = this.chatBubbleInner.cloneNode(true);
+            clonedBubble.appendChild(this.progIconHolder);
+            clonedBubble.appendChild(clonedBubbleInner);
             let cloneUserChatBubble = this.userChatBubble.cloneNode(true);
             let cloneUserChatBubbleInner = this.userChatBubbleInner.cloneNode(true);
             cloneUserChatBubble.appendChild(cloneUserChatBubbleInner);
@@ -367,8 +387,7 @@ class Consultation extends HTMLDivElement {
                   this.currentOutput += conts;
                     console.log("contscontscontsconts", conts);
                     
-                    
-                    clonedBubble.innerText = this.currentOutput;
+                    clonedBubbleInner.innerText = this.currentOutput;
                     
 
                 const newMessage = {
@@ -479,7 +498,7 @@ class Consultation extends HTMLDivElement {
             questionBlock.appendChild(chatTextHolder);
 
             questionBlock.addEventListener("click", (event) => {
-                this.chatHomeWrapper.classList.add("hide_page");
+                // this.chatHomeWrapper.classList.add("hide_page");
                 this.inputValue = event.currentTarget.id;
                 
                 this.processMessageToChatGPT();

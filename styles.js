@@ -209,24 +209,31 @@ export const styles = `
     }
 
     .prognosis__chat_bubble_out {
-        border: 1px solid blue;
-        border-radius: 20px;
-        padding: 10px;
+        border-bottom: 1px solid lightgray;
+        padding: 10px 10px 10px 2px;
         margin-bottom: 15px;
         font-size: 14px;
         line-height: 1.5;
+        display: flex;
+        align-items: start;
+        gap: 10px;
     }
     .prognosis__chat_bubble_user {
         margin-bottom: 15px;
-        display: flex;
-        justify-content: end;
         width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 1px solid lightgray;
+    }
+    .prognosis_static_button {
+        background: unset !important;
+        border: unset !important;
+        outline: unset !important;
+        cursor: normal;
     }
     .prognosis__chat_bubble_user_inner {
-        max-width: 90%;
-        border: 1px solid lightgray;
-        border-radius: 20px;
-        padding: 10px;
+        padding: 10px 10px 10px 2px;
     }
     .prognosis__consult_submitBtn {
         width: 35px;
@@ -254,7 +261,7 @@ export const styles = `
     .prognosis_text_input_wrapper {
         width: 100%;
         position: absolute;
-        bottom: 50px;
+        bottom: 70px;
         background-color: #fff;
         padding: 5px 0;
         display: flex;

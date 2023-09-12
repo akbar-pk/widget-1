@@ -211,7 +211,7 @@ class MessageWidget {
             </div>
             <ul class="prognosis-sidebar-menu-list">
               <li>
-                <div class="prognosis-menu-title active" id="prognosis_e_chat">${CHT_ICON} <span class="prognosis-menu-text">Chat</span></div>
+                <div class="prognosis-menu-title active" id="prognosis_e_chat">${CHT_ICON} <span class="prognosis-menu-text">New Chat</span></div>
                 <!--<ul class="prognosis-menu-children">
                   <li class="prognosis_main_nav_item" is="menu-list-item" data-id="newChat" id="menu_item_new_chat"><span class="prognosis-menu-text">New Chat</span></li>
                 </ul>-->
