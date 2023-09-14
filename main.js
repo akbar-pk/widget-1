@@ -199,12 +199,12 @@ class MessageWidget {
   createWidgetContent() {
     // <li is="menu-list-item" data-id="existingChat">Existing Chat</li>
     this.widgetContainer.innerHTML = `
-    <div class="prognosis__wrapper collapsed">
-      <div id="prognosis_side_bar_wrapper" class="prognosis-sidebar-menu-wrapper collapsed" style="background-color: ${this.theme.secondaryColor}">
+    <div class="prognosis__wrapper expanded">
+      <div id="prognosis_side_bar_wrapper" class="prognosis-sidebar-menu-wrapper expanded" style="background-color: ${this.theme.secondaryColor}">
         <div class="aside-wrap" id="prognosis_main_nav_wrapper">
             <a href="https://myprognosis.ai/">${PROGNOSIS_LOGO}</a>
             <div class="prognosis_menu_collapse_btn_holder">
-              <button class="prognosis_menu_collapse_btn collapsed" id="prognosis_menu_collapse_btn">
+              <button class="prognosis_menu_collapse_btn expanded" id="prognosis_menu_collapse_btn">
                 <span class="collapse_arrow_left">${LEFT_ARROW}</span>
                 <span class="collapse_arrow_right">${RIGHT_ARROW}</span>
               </button>
@@ -278,6 +278,5 @@ function initializeWidget(position) {
   return new MessageWidget(position);
   
 }
-
 
 window.IntPrognosisWidget = initializeWidget;

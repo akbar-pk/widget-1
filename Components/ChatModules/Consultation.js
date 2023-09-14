@@ -1,4 +1,4 @@
-import { BLOOD_PRESSURE_ICON, BRAIN_ICON, FOOD_ICON, HEART_ICON, LOGO_FIRST_PART, PROGNOSIS_LOGO, RECORDING_ICON, SEND_ICON, START_RECORD_ICON, STOP_RECORD_ICON, USER_ICON } from "../../svgIcons.js";
+import { BLOOD_PRESSURE_ICON, BRAIN_ICON, DISLIKE_BUTTON, FOOD_ICON, HEART_ICON, LIKE_BUTTON, LOGO_FIRST_PART, PROGNOSIS_LOGO, RECORDING_ICON, SEND_ICON, START_RECORD_ICON, STOP_RECORD_ICON, USER_ICON } from "../../svgIcons.js";
 
 class Consultation extends HTMLDivElement {
     constructor() {
@@ -18,6 +18,9 @@ class Consultation extends HTMLDivElement {
         this.newChatBtn.addEventListener("click", () => {
             this.chatLeftContentBox.classList.remove("hide_section");
             this.displayArea.classList.add("hide_section");
+            this.textInputWrapper.classList.add("hide_section");
+            this.chatHomeRight.classList.remove("hide_section");
+            this.chatHomeLeft.classList.remove("maximum");
         });
 
         // Chat loader 
@@ -94,6 +97,43 @@ class Consultation extends HTMLDivElement {
         this.chatHomeLeftInner.appendChild(this.chatInnerHeader);
         this.chatHomeLeft.appendChild(this.chatHomeLeftInner);
 
+        // Main question
+        this.mainQuestionInputWrapper = document.createElement("div");
+        this.mainQuestionInputWrapper.classList.add("prognosis_main_question_input_wrapper");
+        this.mainQuestionInput = document.createElement("input");
+        this.mainQuestionInput.setAttribute("id", "prognosis_main_question_input")
+        this.mainQuestionInput.classList.add("prognosis_main_question_input");
+        this.mainQuestionInput.setAttribute("name", "mainInput");
+        this.mainQuestionInputWrapper.appendChild(this.mainQuestionInput);
+        // this.mainQuestionInputWrapper.classList.add("hide_element");
+        
+        this.mainQuestionSubmitBtn = document.createElement("button");
+        this.mainQuestionSubmitBtn.classList.add("prognosis_main_question_btn");
+        this.mainQuestionSubmitBtn.innerHTML = SEND_ICON;
+        this.mainQuestionSubmitBtn.addEventListener("click", () => {
+            this.clearCurrentChat();
+            this.processMessageToChatGPT({
+                from: "main"
+            })
+        });
+        this.mainQuestionInput.addEventListener("keyup", (e) => {
+            this.inputValue = e.target.value;
+            console.log("this.inputValue", this.inputValue);
+            console.log("e", e.target.value);
+        });
+
+        this.mainQuestionInput.addEventListener("keyup", (event) => {
+            if(event.key === "Enter") {
+                this.clearCurrentChat();
+                this.processMessageToChatGPT({
+                    from: "main"
+                });
+            }
+        });
+        this.mainQuestionInputWrapper.appendChild(this.mainQuestionSubmitBtn);
+        this.chatInnerHeader.appendChild(this.mainQuestionInputWrapper);
+        // Main question END
+
         this.chatLeftContentBox = document.createElement("div");
         this.chatLeftContentBox.classList.add("prognosis_chat_home_left_content");
 
@@ -146,7 +186,6 @@ class Consultation extends HTMLDivElement {
         // Pre-defined questions END
 
         
-
         this.displayArea = document.createElement("div");
         this.displayArea.classList.add("prognosis__consult_display_area");
         this.displayArea.classList.add("prognosis__display_area");
@@ -176,7 +215,7 @@ class Consultation extends HTMLDivElement {
         // Text Input
 
         this.inputBox = document.createElement("TEXTAREA");
-        this.inputBox.placeholder = "Type question";
+        this.inputBox.placeholder = "Ask a follow-up question";
         this.inputBox.classList.add("prognosis__consult_inputbox");
         this.inputBox.addEventListener("keyup", (e) => {
             this.inputValue = e.target.value;
@@ -240,12 +279,15 @@ class Consultation extends HTMLDivElement {
         this.textInputWrapper.classList.add("prognosis_text_input_wrapper");
         this.textInputContainer = document.createElement("div");
         this.textInputContainer.classList.add("prognosis_text_input_container");
+        this.shadowLayer = document.createElement("div");
+        this.shadowLayer.classList.add("shadow_layer");
         this.textInputContainer.appendChild(this.inputBox);
         this.textInputContainer.appendChild(this.submitBtn);
         this.textInputContainer.appendChild(this.chatStopBtn);
         this.textInputContainer.appendChild(this.clearChatBtn);
+        this.textInputWrapper.appendChild(this.shadowLayer);
         this.textInputWrapper.appendChild(this.textInputContainer);
-        
+        this.textInputWrapper.classList.add("hide_section");
         //Text Input END
 
         
@@ -278,21 +320,48 @@ class Consultation extends HTMLDivElement {
         // this.appendChild(this.displayArea);
         this.appendChild(this.inputWrapper);
 
+        // Like/Dislike
+        this.userRatingWrapper = document.createElement("div");
+        this.userRatingWrapper.classList.add("prognosis_user_rating_wrapper");
+        this.userLikeWrapper = document.createElement("div");
+        this.userLikeWrapper.classList.add("prognosis_user_like_wrapper");
+        this.userLikeBtn = document.createElement("button");
+        this.userLikeBtn.classList.add("prognosis_user_like_btn");
+        this.userLikeBtn.innerHTML = LIKE_BUTTON;
+        this.userLikeBtn.addEventListener("click", (question, response) => {
+            console.log("Like", question, response);
+        });
+
+        this.userDislikeBtn = document.createElement("button");
+        this.userDislikeBtn.classList.add("prognosis_user_dislike_btn");
+        this.userDislikeBtn.innerHTML = DISLIKE_BUTTON;
+        this.userDislikeBtn.addEventListener("click", (question, response) => {
+            console.log("Like", question, response);
+        });
+
         this.API_KEY = localStorage.getItem("prognosisOAKey");
         this.controller = null;
 
+        this.placeholderAnimation();
     }
 
     get consult() {
         console.log("get consult");
     }
 
-    async processMessageToChatGPT() {
+    async processMessageToChatGPT(options) {
+        this.chatHomeRight.classList.add("hide_section");
+        this.chatHomeLeft.classList.add("maximum");
+        let calledFrom = "none";
+        if(options && options.from) {
+            calledFrom = options.from
+        }
         this.chatLeftContentBox.classList.add("hide_section");
         this.displayArea.classList.remove("hide_section");
         let inputMsg = "";
         inputMsg = this.inputValue;
-        
+        this.mainQuestionInput.value = inputMsg;
+        this.mainQuestionInputWrapper.classList.remove("hide_element");
 
         if(inputMsg.trim().length) {
             this.questionsWrapper.classList.add("hide_section");
@@ -301,13 +370,25 @@ class Consultation extends HTMLDivElement {
 
             let clonedBubble = this.chatBubble.cloneNode(true);
             let clonedBubbleInner = this.chatBubbleInner.cloneNode(true);
+            const clonedUserResponse = this.userRatingWrapper.cloneNode(true);
+            const clonedLikeButton = this.userLikeBtn.cloneNode(true);
+            clonedUserResponse.appendChild(clonedLikeButton);
+            const clonedDisLikeButton = this.userDislikeBtn.cloneNode(true);
+            clonedUserResponse.appendChild(clonedDisLikeButton);
+            clonedBubble.appendChild(clonedUserResponse);
             clonedBubble.appendChild(this.progIconHolder);
             clonedBubble.appendChild(clonedBubbleInner);
             let cloneUserChatBubble = this.userChatBubble.cloneNode(true);
             let cloneUserChatBubbleInner = this.userChatBubbleInner.cloneNode(true);
             cloneUserChatBubble.appendChild(cloneUserChatBubbleInner);
-            this.displayArea.appendChild(cloneUserChatBubble);
-            cloneUserChatBubbleInner.innerText = inputMsg;
+
+            this.textInputWrapper.classList.remove("hide_section");
+
+            if(calledFrom === "none") {
+                this.displayArea.appendChild(cloneUserChatBubble);
+                cloneUserChatBubbleInner.innerText = inputMsg;
+            }
+            
             this.displayArea.appendChild(clonedBubble);
             
             this.displayArea.appendChild(this.loaderWrapper);
@@ -398,9 +479,9 @@ class Consultation extends HTMLDivElement {
 
                   
 
-                  setTimeout(() => {
-                    this.displayArea.scrollTop = this.displayArea.scrollHeight
-                }, 100)
+                //   setTimeout(() => {
+                //     this.displayArea.scrollTop = this.displayArea.scrollHeight
+                //     }, 100)
                 }
             }
         }
@@ -452,24 +533,6 @@ class Consultation extends HTMLDivElement {
         
         data.forEach(element => {
 
-        // this.chatQuestionHeart = document.createElement("h4");
-        // this.chatQuestionHeart.classList.add("prognosis_chat_question_item");
-        // this.chatQuestionHeartIcon = document.createElement("span");
-        // this.chatQuestionHeartIcon.classList.add("prognosis_chat_question_icon");
-        // this.chatQuestionHeart.setAttribute("data-question", "Why is my chest beating fast while resting?")
-        // this.chatQuestionHeartIcon.innerHTML = HEART_ICON;
-        // this.chatQuestionHeart.appendChild(this.chatQuestionHeartIcon);
-        // const heartQuestionOne = document.createTextNode("Why is my chest beating fast while resting?");
-        // this.chatQuestionHeart.addEventListener("click", () => {
-        //     this.chatHomeWrapper.classList.add("hide_page");
-        //     this.inputValue = "why is my chest beating fast while resting";
-        //     this.processMessageToChatGPT();
-        // });
-        // this.chatQuestionHeart.appendChild(heartQuestionOne);
-        // this.chatLetListHolder.appendChild(this.chatQuestionHeart);
-
-            
-
             const questionBlock = document.createElement("h4");
             questionBlock.classList.add("prognosis_chat_question_item");
             questionBlock.setAttribute("id", element.question);
@@ -500,8 +563,10 @@ class Consultation extends HTMLDivElement {
             questionBlock.addEventListener("click", (event) => {
                 // this.chatHomeWrapper.classList.add("hide_page");
                 this.inputValue = event.currentTarget.id;
-                
-                this.processMessageToChatGPT();
+                this.clearCurrentChat();
+                this.processMessageToChatGPT({
+                    from: "main"
+                });
                 this.questionsWrapper.classList.add("hide_section");
             });
             
@@ -511,13 +576,80 @@ class Consultation extends HTMLDivElement {
     }
 
     
-    
+    clearCurrentChat() {
+        this.displayArea.innerHTML = "";
+        this.clearChatBtn.style.display = "none";
+    }
 
     askQuestion(event) {
         console.log("question", event.currentTarget.id);
         this.inputValue = event.currentTarget.id;
         this.processMessageToChatGPT();
     }
+
+
+    placeholderAnimation() {
+
+        function addToPlaceholder(toAdd, el) {
+            el.setAttribute('placeholder', el.getAttribute('placeholder') + toAdd);
+            // Delay between symbols "typing" 
+            return new Promise(resolve => setTimeout(resolve, 100));
+        }
+
+        function clearPlaceholder(el) {
+            el.setAttribute("placeholder", "");
+        }
+
+        const printPhrase = (phrase, el) => {
+            return new Promise(resolve => {
+                // Clear placeholder before typing next phrase
+                clearPlaceholder(el);
+                let letters = phrase.split('');
+                // For each letter in phrase
+                letters.reduce(
+                    (promise, letter, index) => promise.then(_ => {
+                        // Resolve promise when all letters are typed
+                        if (index === letters.length - 1) {
+                            // Delay before start next phrase "typing"
+                            setTimeout(resolve, 1000);
+                        }
+                        return addToPlaceholder(letter, el);
+                    }),
+                    Promise.resolve()
+                );
+            });
+        }
+
+        function printPhrases(phrases, el) {
+            // For each phrase
+            // wait for phrase to be typed
+            // before start typing next
+            const prom = phrases.reduce(
+                (promise, phrase) => promise.then(_ => printPhrase(phrase, el)), 
+                Promise.resolve()
+            );
+
+            prom.then((res) => run());
+            
+        }
+
+        function run() {
+            let phrases = [
+                "What is hypertension?",
+                "What is fatty liver?",
+                "What atrial fibrillation?",
+            ];
+        
+            printPhrases(phrases, document.getElementById("prognosis_main_question_input"));
+        }
+        
+
+        run();
+
+        // setInterval(run, 4000);
+    }
+
+    
 }
 
 customElements.define("consultation-component", Consultation, {

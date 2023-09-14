@@ -7,6 +7,34 @@ export const styles = `
         padding: 0;
         margin: 0;
     } 
+    .shadow_layer {
+        width: 100%;
+        height: 1px;
+        position: relative;
+        z-index: 1;
+    }
+    .shadow_layer::before {
+        content: "";
+        display: block;
+        width: 100%;
+        position: relative;
+        box-shadow: 0px -1px 3px #000;
+        height: 1px;
+        z-index: 0;
+    }
+    .shadow_layer::after {
+        content: "";
+        display: block;
+        width: 100%;
+        position: relative;
+        height: 2px;
+        background: #fff;
+        z-index: 1;
+    }
+    
+    .hide_element {
+        display: none !important;
+    }
     button, button:focus-visible, button:focus, button:focus-within, button:active {
         border: none;
         outline: none;
@@ -71,8 +99,12 @@ export const styles = `
         background: #fff;
     }
     .prognosis_chat_home_wrapper .prognosis_chat_home_left {
-        width: 60%;
+        width: 55%;
         height: 100%;
+    }
+    .prognosis_chat_home_wrapper .prognosis_chat_home_left.maximum {
+        width: 75%;
+        border-right: 1px solid lightgray;
     }
     .prognosis_chat_home_logo_holder {
         margin-top: 20px;
@@ -93,11 +125,31 @@ export const styles = `
         margin-top: 50px;
         padding: 0 30px;
     }
+    .prognosis_main_question_input_wrapper {
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        border: 1px solid #acacac;
+        margin-top: 20px;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 62%;
+    }
+    .prognosis_main_question_input {
+        padding: 15px;
+        border: none;
+        outline: none !important;
+        width: 80%;
+    }
+    .prognosis_main_question_input_wrapper:hover {
+        box-shadow: 0px 0px 15px #ababab;
+    }
     .prognosis_e_chat {
         cursor: pointer;
     }
     .prognosis_chat_home_wrapper .prognosis_chat_home_right {
-        width: 40%;
+        width: 45%;
         height: 100%;
         background: url("https://images.unsplash.com/photo-1530497610245-94d3c16cda28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80") top center / cover no-repeat;
     }
@@ -124,6 +176,10 @@ export const styles = `
         border: 1px solid #dcdbdb;
         padding: 10px 15px 10px 15px;
         border-radius: 40px;
+        transition: all 0.3s ease;
+    }
+    .prognosis_chat_home_left_list_holder .prognosis_chat_question_item:hover {
+        box-shadow: 0px 0px 10px #ccc;
     }
     .prognosis_chat_question_item:hover {
         font-weight: bold;
@@ -207,16 +263,42 @@ export const styles = `
         width: 30px;
         height: 30px;
     }
-
+    .prognosis_user_rating_wrapper {
+        margin-left: -56px;
+        width: 50px;
+        display: flex;
+        flex-direction: column;
+    }
+    .prognosis_user_like_btn, .prognosis_user_dislike_btn {
+        background: transparent;
+        border: unset;
+        outline: unset;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-radius: 10px;
+    }
+    .prognosis_user_like_btn svg path, .prognosis_user_dislike_btn svg path {
+        fill: #194ca6;
+    }
+    .prognosis_user_like_btn:hover svg path, .prognosis_user_dislike_btn:hover svg path {
+        fill: #63c68d;
+    }
     .prognosis__chat_bubble_out {
-        border-bottom: 1px solid lightgray;
-        padding: 10px 10px 10px 2px;
+        border: 1px solid lightgray;
+        padding: 15px;
         margin-bottom: 15px;
         font-size: 14px;
         line-height: 1.5;
         display: flex;
         align-items: start;
         gap: 10px;
+        border-radius: 15px;
+        background: #f3f3f3;
+        margin-left: 50px;
+        max-width: 800px;
+    }
+    .prognosis__chat_bubble_out_inner {
+        max-width: 430px;
     }
     .prognosis__chat_bubble_user {
         margin-bottom: 15px;
@@ -235,7 +317,7 @@ export const styles = `
     .prognosis__chat_bubble_user_inner {
         padding: 10px 10px 10px 2px;
     }
-    .prognosis__consult_submitBtn {
+    .prognosis__consult_submitBtn, .prognosis_main_question_btn {
         width: 35px;
         height: 35px;
         border-radius: 100%;
@@ -265,19 +347,27 @@ export const styles = `
         background-color: #fff;
         padding: 5px 0;
         display: flex;
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
     }
     .prognosis_text_input_container {
         border-radius: 30px;
-        border: 1px solid #ccc;
+        border: 1px solid #a7a7a7;
         display: flex;
         gap: 10px;
         align-items: center;
         padding: 0 15px;
         width: 100%;
         max-width: 70%;
-        margin: 0;
+        margin: 5px 0 0 0;
         overflow: hidden;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 1;
+    }
+    .prognosis_text_input_container:hover {
+        box-shadow: 0px 0px 15px #ababab;
     }
     .shadow-edge {
         box-shadow: 0px 0px 3px black;
@@ -307,7 +397,7 @@ export const styles = `
     .prognosis__display_area {
         width: 100%;
         height: calc(100% - 200px);
-        padding: 70px 30px 15px 30px;
+        padding: 70px 30px 50px 30px;
         box-sizing: border-box;
         overflow: auto;
     }
