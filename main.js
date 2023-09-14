@@ -11,6 +11,7 @@ import "./Components/ChatModules/Guidelines.js";
 
 class MessageWidget {
   constructor(options) { 
+
     this.from = options.from;
     this.defaultTheme = {
       primaryColor: "red",
@@ -173,6 +174,8 @@ class MessageWidget {
     container.appendChild(this.widgetContainer);
     container.appendChild(this.buttonContainer);
 
+    
+
     // Open chat by default
     setTimeout(() => {
       document.getElementById("prognosis_consultation_holder").classList.remove("hidden_module");;
@@ -276,6 +279,7 @@ class MessageWidget {
 
 function initializeWidget(position) {
   return new MessageWidget(position);
+  
 }
 
 window.IntPrognosisWidget = initializeWidget;

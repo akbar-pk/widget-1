@@ -99,7 +99,7 @@ var A=Object.defineProperty;var S=(d,t,s)=>t in d?A(d,t,{enumerable:!0,configura
         background: #fff;
     }
     .prognosis_chat_home_wrapper .prognosis_chat_home_left {
-        width: 55%;
+        width: 50%;
         height: 100%;
     }
     .prognosis_chat_home_wrapper .prognosis_chat_home_left.maximum {
@@ -149,7 +149,7 @@ var A=Object.defineProperty;var S=(d,t,s)=>t in d?A(d,t,{enumerable:!0,configura
         cursor: pointer;
     }
     .prognosis_chat_home_wrapper .prognosis_chat_home_right {
-        width: 45%;
+        width: 50%;
         height: 100%;
         background: url("https://images.unsplash.com/photo-1530497610245-94d3c16cda28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80") top center / cover no-repeat;
     }
@@ -264,11 +264,13 @@ var A=Object.defineProperty;var S=(d,t,s)=>t in d?A(d,t,{enumerable:!0,configura
         height: 30px;
     }
     .prognosis_user_rating_wrapper {
-        margin-left: -56px;
+        margin-left: -70px;
+        margin-right: 10px;
         width: 50px;
         display: flex;
         flex-direction: column;
     }
+
     .prognosis_user_like_btn, .prognosis_user_dislike_btn {
         background: transparent;
         border: unset;
@@ -276,6 +278,11 @@ var A=Object.defineProperty;var S=(d,t,s)=>t in d?A(d,t,{enumerable:!0,configura
         cursor: pointer;
         transition: all 0.3s ease;
         border-radius: 10px;
+        background: unset !important;
+    }
+    .prognosis_user_like_btn svg, .prognosis_user_dislike_btn svg {
+        width: 25px;
+        height: 25px;
     }
     .prognosis_user_like_btn svg path, .prognosis_user_dislike_btn svg path {
         fill: #194ca6;
@@ -298,7 +305,7 @@ var A=Object.defineProperty;var S=(d,t,s)=>t in d?A(d,t,{enumerable:!0,configura
         max-width: 800px;
     }
     .prognosis__chat_bubble_out_inner {
-        max-width: 430px;
+        max-width: 700px;
     }
     .prognosis__chat_bubble_user {
         margin-bottom: 15px;
@@ -327,6 +334,7 @@ var A=Object.defineProperty;var S=(d,t,s)=>t in d?A(d,t,{enumerable:!0,configura
         justify-content: center;
         align-items: center;
         background: unset !important;
+        color: black !important;
     }
     .prognosis__consult_submitBtn:hover {
         background: lightgray !important;
