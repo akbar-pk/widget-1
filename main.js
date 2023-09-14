@@ -276,7 +276,6 @@ class MessageWidget {
 
 function initializeWidget(position) {
   return new MessageWidget(position);
-  
 }
 
 window.IntPrognosisWidget = initializeWidget;
